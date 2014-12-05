@@ -11,6 +11,7 @@ class DefaultView extends View {
 		
 		// Make Sub Views
 		$this->primary_header = new View(ROOT . '/app/templates/primary_header.php');
+		$this->footer = new View(ROOT . '/app/templates/footer.php');
 		
 	}
 }

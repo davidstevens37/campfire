@@ -4,7 +4,12 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui" />
+
 	<title>Page Title</title>
+	
+	<!-- Font Imports -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href='http://fonts.googleapis.com/css?family=Crimson+Text|Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
 	
 	<!-- Main CSS -->
 	<link rel="stylesheet" href="/bower_components/ReptileForms/dist/reptileforms.min.css">
@@ -16,10 +21,11 @@
 </head>
 <body>
 
+	<?php echo $primary_header; ?>
 	<div class="page">
-		<?php echo $primary_header; ?>
 		<?php echo $main_content; ?>
 	</div>
+	<?php echo $footer; ?>
 
 	<!-- Include Common Scripts -->
 	<script src="/bower_components/jquery/dist/jquery.js"></script>

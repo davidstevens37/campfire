@@ -1,5 +1,254 @@
-div {
-	a {
-		color: green;
+@mixin size-bg($color, $height, $width) {
+	background-color: $color;
+	height: $height;
+	width: $width;
+}
+
+//font-family: 'Crimson Text', serif;
+//font-family: 'Open Sans', sans-serif;
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	font-family: 'Crimson Text', serif;
+
+}
+
+body {
+	background-color: #F4F8F9;
+}
+
+p, a {
+	font-family: 'Open Sans', sans-serif;
+}
+
+button {
+	font-family: 'Open Sans', sans-serif;
+	border: 1px solid blue;
+	color: blue;
+	padding: 5px;
+	background-color: white;
+	border-radius: 30px;
+	width: 100px;
+}
+
+.main-header {
+	@include size-bg(#2D3645,110px,100%);
+	position: relative;
+	margin-bottom: 15px;
+	min-width: 1060px;
+	border-top: 3px solid orange;
+	> div.container {
+		width: 1060px;
+		margin: auto;
+		position: relative;
+		min-height: 100%;
 	}
+
+	.icons {
+		position: absolute;
+		top: 5px;
+		right: 20px;
+		font-size: 16pt;
+		color: #6B727C;
+
+		* {
+			margin-left: 30px;
+		}
+
+	}
+	.profile-picture {
+		display: inline-block;
+		height: 35px;
+		width: 35px;
+		border-radius: 50%;
+		border: 1px solid orange;
+		transform: translateY(25%);
+	}
+	nav {
+		@include size-bg(#FFF,initial,100%);
+		min-width: 1060px;
+		position: absolute;
+		bottom: 0;
+		text-align: center;
+		border-bottom: 1px solid #ddd;
+
+
+		a {
+			margin: 0 25px;
+			display: inline-block;
+			padding: 10px;
+			text-decoration: none;
+			color: #808080;
+		}
+	}
+}
+
+.logo {
+	position: absolute;
+	top: 15px;
+	left: 15px;
+	color: white;
+	font-size: 24pt;
+	text-decoration: none;
+	font-family: 'Crimson Text', serif;
+}
+.logo span {
+	color: orange;
+}
+
+.page {
+	@include size-bg("",initial,1060px);;
+
+	margin: auto;
+	&:after {
+		content: " ";
+		clear: both;
+		display: block;
+		visibility: hidden;
+	}
+}
+
+
+// EVENT DETAILS QUICK LOOK
+.event-details {
+	@include size-bg("",400px,225px);
+	border: 1px solid #DEDEDE;
+	background-color: #FFF;
+	float: left;
+	margin-left: 15px;
+	border-radius: 3px;
+}
+
+
+
+//MEMBERS ATTENDING
+.group {
+	float: right;
+	@include size-bg(transparant,"",225px);
+	min-height: 150px;
+	// margin-right: 15px;
+
+	.member {
+		overflow: hidden;
+		margin-top: 15px;
+
+		> :first-child {
+			height: 50px;
+			width: 50px;
+			border-radius: 50%;
+			background-color: blue;
+			float: left;
+		}
+		> :last-child {
+			margin-left: 60px;
+			padding-top: 10px;
+			text-transform: capitalize;
+			:last-child {
+				font-family: 'Open Sans', sans-serif;
+
+				font-size: 8pt;
+				color: orange;
+				margin-top: -3px
+
+			}
+		}
+	}
+}
+
+img {
+	height: 35px;
+}
+
+//BOARD AND COMMENTS
+.board {
+	margin: 0 255px;
+	
+}
+
+.object {
+
+	border-radius: 3px;
+
+	background-color: white;
+
+	> :first-child {
+		padding: 10px;
+		border-bottom: 1px solid #ddd;
+	}
+	> :nth-child(2) {
+		padding: 10px;
+	}
+
+}
+
+.board {
+
+	> * {
+		@extend .object;
+		textarea {
+			min-width: 100%;
+			max-width: 100%;
+			max-height: 20px;
+		}
+
+		border: 1px solid #DEDEDE;
+
+		+ * {
+			margin-top: 15px;
+		}
+	}
+	
+	.bulletin p {
+		min-height: 200px;
+	}
+
+	.comment {
+		header {
+			div {
+				background-color: blue;
+				float: left;
+				height: 30px;
+				width: 30px;
+				border-radius: 50%;
+			}
+			h2 {
+				margin-left: 40px;
+			}
+
+		}
+	}
+
+}
+
+footer {
+	padding: 10px;
+	background-color: white;
+	height: 200px;
+	margin-top: 25px;
+
+	text-align: center;
+	nav {
+		margin: 25px;
+		a {
+			text-decoration: none;
+			padding: 10px;
+		}
+
+	}
+	h5 {
+		font-family: 'Open Sans', sans-serif;
+	}
+
+
+	.logo-footer {
+		color: black;
+		font-size: 24pt;
+		text-decoration: none;
+		font-family: 'Crimson Text', serif;
+		span {
+			color: orange;
+		}
+	}
+
 }
