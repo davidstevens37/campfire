@@ -6,6 +6,7 @@ Class Comment extends Model {
 		$sql = 
 			'SELECT * FROM `comment` 
 			LEFT JOIN `user` USING (user_id)
+			LEFT JOIN `picture` USING (picture_id)
 			WHERE event_id = ' . $event_id . '
 			ORDER BY `datetime_added` DESC'
 			;

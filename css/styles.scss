@@ -7,6 +7,8 @@
 //font-family: 'Crimson Text', serif;
 //font-family: 'Open Sans', sans-serif;
 
+
+
 * {
 	box-sizing: border-box;
 	margin: 0;
@@ -20,12 +22,16 @@ body {
 
 p, a {
 	font-family: 'Open Sans', sans-serif;
+	color: #808080;
+
 }
+
+
 
 button {
 	font-family: 'Open Sans', sans-serif;
-	border: 1px solid blue;
-	color: blue;
+	border: 1px solid orange;
+	color: orange;
 	padding: 5px;
 	background-color: white;
 	border-radius: 30px;
@@ -79,7 +85,6 @@ button {
 			display: inline-block;
 			padding: 10px;
 			text-decoration: none;
-			color: #808080;
 		}
 	}
 }
@@ -98,8 +103,8 @@ button {
 }
 
 .page {
-	@include size-bg("",initial,1060px);;
-
+	@include size-bg(200px,initial,1060px);;
+	min-height: 600px;
 	margin: auto;
 	&:after {
 		content: " ";
@@ -111,15 +116,45 @@ button {
 
 
 // EVENT DETAILS QUICK LOOK
-.event-details {
+.event-details, .user {
 	@include size-bg("",400px,225px);
 	border: 1px solid #DEDEDE;
 	background-color: #FFF;
 	float: left;
 	margin-left: 15px;
 	border-radius: 3px;
+	text-align: center;
+
+	> :not(:nth-child(2)){
+		font-family: 'Open Sans', sans-serif;
+	}
+
+	>  :first-child {
+		width: 100px;
+		height: 100px;
+		border-radius: 50%;
+		background-size: cover;
+		margin: 30px auto;
+	}
+
 }
 
+// event info sections
+.info {
+
+	h2, h4, h5 {
+		font-weight: lighter;
+		margin-top: 15px;
+	}
+
+	h5 {
+		color: orange;
+	}
+
+	h4 {
+		color: #808080;
+	}
+}
 
 
 //MEMBERS ATTENDING
@@ -137,12 +172,12 @@ button {
 			height: 50px;
 			width: 50px;
 			border-radius: 50%;
-			background-color: blue;
+			background-size: cover;
 			float: left;
 		}
 		> :last-child {
 			margin-left: 60px;
-			padding-top: 10px;
+			padding-top: 5px;
 			text-transform: capitalize;
 			:last-child {
 				font-family: 'Open Sans', sans-serif;
@@ -160,29 +195,38 @@ img {
 	height: 35px;
 }
 
-//BOARD AND COMMENTS
-.board {
-	margin: 0 255px;
-	
-}
+
+
+//board and comments
 
 .object {
 
 	border-radius: 3px;
-
+	border: 1px solid #DEDEDE;
 	background-color: white;
 
 	> :first-child {
 		padding: 10px;
 		border-bottom: 1px solid #ddd;
+		h2 {
+			font-weight: lighter;
+		}
+
 	}
 	> :nth-child(2) {
 		padding: 10px;
+		min-height: 25px;
+		p {
+			min-height: 200px;
+		}
 	}
 
 }
 
 .board {
+
+	margin: 0 255px;
+
 
 	> * {
 		@extend .object;
@@ -192,21 +236,16 @@ img {
 			max-height: 20px;
 		}
 
-		border: 1px solid #DEDEDE;
-
 		+ * {
 			margin-top: 15px;
 		}
 	}
-	
-	.bulletin p {
-		min-height: 200px;
-	}
+
 
 	.comment {
 		header {
 			div {
-				background-color: blue;
+				background-size: cover;
 				float: left;
 				height: 30px;
 				width: 30px;
@@ -214,9 +253,19 @@ img {
 			}
 			h2 {
 				margin-left: 40px;
-			}
+				text-transform: capitalize;
+				font-weight: lighter;
 
+			}
 		}
+		p {
+			padding: 25px;
+		}
+
+	}
+	&.events {
+		margin-left: 255px;
+		width: 75%;
 	}
 
 }
@@ -251,4 +300,61 @@ footer {
 		}
 	}
 
+}
+
+
+
+
+//my events
+
+.events	> * + * {
+		margin-top: 20px;
+	}
+
+
+.event {
+	overflow: hidden;
+	position: relative;
+
+	a {
+		display: block;
+		position: absolute;
+		right: 0;
+		left: 0;
+		top: 0;
+		bottom: 0;
+	}
+
+	//picture of event
+	> :first-child {
+		position: relative;
+		float: left;
+		width: 20%;
+		background-size: cover;
+		border-radius: 50%;
+		
+		//psudo element to enable width to be the same and height
+		&:before {
+			display: block;
+			padding-top: 100%;
+			content: "";
+		}
+	}
+	
+	// event i
+	> .info {
+		width: 40%;
+		float: left;
+		padding-left: 25px;
+	}
+
+	// description
+	> :nth-child(3) {
+		width: 40%;
+		float: left;
+		padding: 20px 0;
+		font-family: 'Open Sans', sans-serif;
+		color: #808080;
+		font-style: italic;
+	}
 }

@@ -7,12 +7,13 @@ body {
   background-color: #F4F8F9; }
 
 p, a {
-  font-family: 'Open Sans', sans-serif; }
+  font-family: 'Open Sans', sans-serif;
+  color: #808080; }
 
 button {
   font-family: 'Open Sans', sans-serif;
-  border: 1px solid blue;
-  color: blue;
+  border: 1px solid orange;
+  color: orange;
   padding: 5px;
   background-color: white;
   border-radius: 30px;
@@ -59,8 +60,7 @@ button {
       margin: 0 25px;
       display: inline-block;
       padding: 10px;
-      text-decoration: none;
-      color: #808080; }
+      text-decoration: none; }
 
 .logo {
   position: absolute;
@@ -75,9 +75,10 @@ button {
   color: orange; }
 
 .page {
-  background-color: "";
+  background-color: 200px;
   height: initial;
   width: 1060px;
+  min-height: 600px;
   margin: auto; }
   .page:after {
     content: " ";
@@ -85,7 +86,7 @@ button {
     display: block;
     visibility: hidden; }
 
-.event-details {
+.event-details, .user {
   background-color: "";
   height: 400px;
   width: 225px;
@@ -93,7 +94,24 @@ button {
   background-color: #FFF;
   float: left;
   margin-left: 15px;
-  border-radius: 3px; }
+  border-radius: 3px;
+  text-align: center; }
+  .event-details > :not(:nth-child(2)), .user > :not(:nth-child(2)) {
+    font-family: 'Open Sans', sans-serif; }
+  .event-details > :first-child, .user > :first-child {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-size: cover;
+    margin: 30px auto; }
+
+.info h2, .info h4, .info h5 {
+  font-weight: lighter;
+  margin-top: 15px; }
+.info h5 {
+  color: orange; }
+.info h4 {
+  color: #808080; }
 
 .group {
   float: right;
@@ -108,11 +126,11 @@ button {
       height: 50px;
       width: 50px;
       border-radius: 50%;
-      background-color: blue;
+      background-size: cover;
       float: left; }
     .group .member > :last-child {
       margin-left: 60px;
-      padding-top: 10px;
+      padding-top: 5px;
       text-transform: capitalize; }
       .group .member > :last-child :last-child {
         font-family: 'Open Sans', sans-serif;
@@ -123,36 +141,44 @@ button {
 img {
   height: 35px; }
 
-.board {
-  margin: 0 255px; }
-
 .object, .board > * {
   border-radius: 3px;
+  border: 1px solid #DEDEDE;
   background-color: white; }
   .object > :first-child, .board > * > :first-child {
     padding: 10px;
     border-bottom: 1px solid #ddd; }
+    .object > :first-child h2, .board > * > :first-child h2 {
+      font-weight: lighter; }
   .object > :nth-child(2), .board > * > :nth-child(2) {
-    padding: 10px; }
+    padding: 10px;
+    min-height: 25px; }
+    .object > :nth-child(2) p, .board > * > :nth-child(2) p {
+      min-height: 200px; }
 
-.board > * {
-  border: 1px solid #DEDEDE; }
+.board {
+  margin: 0 255px; }
   .board > * textarea {
     min-width: 100%;
     max-width: 100%;
     max-height: 20px; }
   .board > * + * {
     margin-top: 15px; }
-.board .bulletin p {
-  min-height: 200px; }
-.board .comment header div {
-  background-color: blue;
-  float: left;
-  height: 30px;
-  width: 30px;
-  border-radius: 50%; }
-.board .comment header h2 {
-  margin-left: 40px; }
+  .board .comment header div {
+    background-size: cover;
+    float: left;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%; }
+  .board .comment header h2 {
+    margin-left: 40px;
+    text-transform: capitalize;
+    font-weight: lighter; }
+  .board .comment p {
+    padding: 25px; }
+  .board.events {
+    margin-left: 255px;
+    width: 75%; }
 
 footer {
   padding: 10px;
@@ -174,3 +200,38 @@ footer {
     font-family: 'Crimson Text', serif; }
     footer .logo-footer span {
       color: orange; }
+
+.events > * + * {
+  margin-top: 20px; }
+
+.event {
+  overflow: hidden;
+  position: relative; }
+  .event a {
+    display: block;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0; }
+  .event > :first-child {
+    position: relative;
+    float: left;
+    width: 20%;
+    background-size: cover;
+    border-radius: 50%; }
+    .event > :first-child:before {
+      display: block;
+      padding-top: 100%;
+      content: ""; }
+  .event > .info {
+    width: 40%;
+    float: left;
+    padding-left: 25px; }
+  .event > :nth-child(3) {
+    width: 40%;
+    float: left;
+    padding: 20px 0;
+    font-family: 'Open Sans', sans-serif;
+    color: #808080;
+    font-style: italic; }

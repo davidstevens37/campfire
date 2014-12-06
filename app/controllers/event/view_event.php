@@ -7,7 +7,7 @@ Class Controller extends AppController {
 		 *	Comments
 		 */
 
-		// Get comments associated with event
+		// Get comments from event_id
 		$comment_results = Comment::get_comments(1);
 
 		// if results are generated
@@ -25,14 +25,21 @@ Class Controller extends AppController {
 		 */
 
 		// Get event members
-		$member_results = UserEvent::get_members(1);
+		$user_event_results = UserEvent::get_members(1);
 
-		if ($member_results->num_rows) {
+		if ($user_event_results->num_rows) {
 
 			// Generate/render members in group
-			while ($row = $member_results->fetch_assoc()) {
+			while ($row = $user_event_results->fetch_assoc()) {
 				$this->view->members .= MemberViewFrag::build($row);
 			}
+
+			// move incrementer back to 1st record
+			$user_event_results->data_seek(0);
+
+			$row = $user_event_results->fetch_assoc();
+			
+			$this->view->event_details = EventDetailsViewFrag::build($row);
 		}
 
 	}
@@ -44,9 +51,7 @@ extract($controller->view->vars);
 ?>
 
 <!-- Event Details / Quick Look -->
-<div class="event-details">
-	event details go here
-</div>
+<?php echo $event_details; ?>
 
 <!-- Group Members - Invitees // Attendees // Host -->
 <div class="group">
@@ -74,4 +79,4 @@ extract($controller->view->vars);
 		</div>
 	</div>
 	<?php echo $comments; ?>
-</main><!-- /div.board -->
+</main><!-- /main.board -->

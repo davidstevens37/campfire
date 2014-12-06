@@ -14,6 +14,8 @@ Router::add('/users/register/process_form/', '/app/controllers/users/register/pr
 // View Event
 Router::add('/event', '/app/controllers/event/view_event.php');
 
+// List Events
+Router::add('/events', '/app/controllers/events/list_events.php');
 
 
 
