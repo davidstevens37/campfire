@@ -3,32 +3,35 @@ Class Controller extends AppController {
 	
 	public function init() {
 
+		
+;		if ($user_id = Access::check()) {
 
-		//get events by user_id
-		$user_event_results = UserEvent::get_events(1);
+			//get events by user_id
+			$user_event_results = UserEvent::get_events($user_id);
 
-		// if results are generated
-		if ($user_event_results->num_rows) {
-			
-			// loop over results and render evnet lists
-			while ($row = $user_event_results->fetch_assoc()) {
+			// if results are generated
+			if ($user_event_results->num_rows) {
+				
+				// loop over results and render evnet lists
+				while ($row = $user_event_results->fetch_assoc()) {
 
-				switch ($row['status']) {
-					case 'hosting':
-						$this->view->events_hosting .= EventListViewFrag::build($row);
-						break;
-					case 'invited':
-						$this->view->events_invited .= EventListViewFrag::build($row);
-						break;
-					case 'attending':
-						$this->view->events_attending .= EventListViewFrag::build($row);
-						break;
-					case 'not attending':
-						$this->view->events_not_attending .= EventListViewFrag::build($row);
-						break;
+					switch ($row['status']) {
+						case 'hosting':
+							$this->view->events_hosting .= EventListViewFrag::build($row);
+							break;
+						case 'invited':
+							$this->view->events_invited .= EventListViewFrag::build($row);
+							break;
+						case 'attending':
+							$this->view->events_attending .= EventListViewFrag::build($row);
+							break;
+						case 'not attending':
+							$this->view->events_not_attending .= EventListViewFrag::build($row);
+							break;
+						
+					}
 					
 				}
-				
 			}
 		}
 	}
@@ -51,6 +54,8 @@ extract($controller->view->vars);
 
 
 <main class="board events">
+
+<!-- If cases to not display event catagories that user does not contain events in  -->
 
 <?php if ($events_hosting): ?>
 	<div>
@@ -102,7 +107,7 @@ extract($controller->view->vars);
 			<h2>No Events</h2>
 		</header>
 		<div class="events">
-			<p>Try hosting an event! We've already taken care of all the stuff that would normally give you a headache.</p>
+			<h4>Try hosting an event! We've already taken care of all the stuff that would normally give you a headache.</h4>
 		</div>
 	</div>
 <?php endif ?>
