@@ -4,8 +4,8 @@ Class Controller extends AppController {
 	public function init() {
 
 		
-;		if ($user_id = Access::check()) {
-
+// ;		if ($user_id = Access::check()) {
+			$user_id = 1;
 			//get events by user_id
 			$user_event_results = UserEvent::get_events($user_id);
 
@@ -33,7 +33,7 @@ Class Controller extends AppController {
 					
 				}
 			}
-		}
+		// }
 	}
 }
 $controller = new Controller();
@@ -101,6 +101,8 @@ extract($controller->view->vars);
 	</div>
 <?php endif ?>
 
+
+<!-- If no events, display no events found message. -->
 <?php if (!$events_hosting && !$events_attending && !$events_invited && !$events_not_attending): ?>
 	<div>
 		<header>

@@ -79,6 +79,8 @@ button {
 		border-radius: 50%;
 		border: 1px solid orange;
 		transform: translateY(25%);
+		background-size: cover;
+		background-image: url('/images/1.jpg');
 	}
 	nav {
 		@include size-bg(#FFF,initial,100%);

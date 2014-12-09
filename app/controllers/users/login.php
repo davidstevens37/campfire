@@ -21,7 +21,7 @@ extract($controller->view->vars);
 	</div>
 	
 
-	<form>
+	<form class="login">
 		<div class="greeting">
 			<h2>Login</h2>
 			<h5>Welcome back</h5>
