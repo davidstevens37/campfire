@@ -14,4 +14,7 @@ extract($controller->view->vars);
 
 ?>
 
-<!-- Notice this welcome variable was created above and passed into the view -->
+	
+<video autoplay loop muted>
+	<source src="/videos/camping.mp4">
+</video>

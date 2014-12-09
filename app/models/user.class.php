@@ -65,4 +65,22 @@ class User extends Model {
 
 	}
 
+	public static function get_user($username, $password) {
+
+		$sql_values = [
+			'username' => $username,
+			'password' => $password
+		];
+
+
+		$sql_values = db::auto_quote($sql_values);
+
+		$sql = 'SELECT * FROM user WHERE username = ' . $sql_values['username'] . ' AND password = ' . $sql_values['password'];
+
+		$results = db::execute($sql);
+
+		return $results->num_rows ? $results : null ;
+
+	}
+
 }

@@ -24,7 +24,7 @@ $(function() {
 
 	
 	// create user submission 
-	$('.create-account form').on('submit', function(e){
+	$('.create-account form.new-user').on('submit', function(e){
 		e.preventDefault();
 		
 		var data = formToObject($('form'));
@@ -54,8 +54,13 @@ $(function() {
 			url: '/auth_login',
 			data: data,
 		})
-		.done(function() {
+		.done(function(RD) {
 			console.log("success");
+			if (!RD.error) {
+				location.href = '/';
+			} else {
+				console.log('user not found');
+			}
 		})
 		.fail(function() {
 			console.log("error");

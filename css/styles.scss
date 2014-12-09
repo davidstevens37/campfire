@@ -1,4 +1,4 @@
-@mixin size-bg($color, $height, $width) {
+ @mixin size-bg($color, $height, $width) {
 	background-color: $color;
 	height: $height;
 	width: $width;
@@ -34,6 +34,16 @@ p, a {
 	height: 550px;
 
 
+}
+
+video {
+	position: absolute;
+	width: 100vw;
+	max-height: 640px;
+	min-width: 1100px;
+	top: 110px;
+	right: 0;
+	z-index: -100;
 }
 
 

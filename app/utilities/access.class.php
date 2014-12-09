@@ -27,9 +27,9 @@ Class Access {
 	}
 	
 	//get user by username and password
-	private static function get_user($user_name, $password) {
+	private static function get_user($username, $password) {
 
-		$user = User::get_user($user_name, $password);
+		$user = User::get_user($username, $password);
 		$user_data = $user->fetch_assoc();
 
 		//return user data array

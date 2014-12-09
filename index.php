@@ -29,6 +29,9 @@ Router::add('/process_user', '/app/controllers/users/process_user.php');
 // Authenticate User
 Router::add('/auth_login', '/app/controllers/users/auth_login.php');
 
+// Authenticate User
+Router::add('/logout', '/app/controllers/users/logout.php');
+
 
 
 
