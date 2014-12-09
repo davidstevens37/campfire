@@ -9,9 +9,9 @@
 		</div>
 	</div>
 	<nav>
-		<a href="">Home</a>
-		<a href="">Create Event</a>
-		<a href="">link</a>
+		<a href="/">Home</a>
+		<a href="/events">My Events</a>
+		<a href="/create_event">Create Event</a>
 		<a href="">link</a>
 		<a href="">link</a>
 	</nav>

@@ -15,16 +15,20 @@ class User extends Model {
 
 		// Prepare SQL Values
 		$sql_values = [
-			'user_id' => $input['user_id'],
+			
 			'first_name' => $input['first_name'],
 			'last_name' => $input['last_name'],
 			'email' => $input['email'],
 			'password' => $input['password'],
-			'datetime_added' => 'NOW()'
+			'username' => $input['username'],
+			'phone' => $input['phone'],
+			'zipcode' => $input['zipcode'],
+			'age' => $input['age'],
+		
 		];
 
 		// Ensure values are encompassed with quote marks
-		$sql_values = db::auto_quote($sql_values, ['datetime_added']);
+		$sql_values = db::auto_quote($sql_values);
 
 		// Insert
 		$results = db::insert('user', $sql_values);

@@ -10,7 +10,7 @@ Class EventListViewFrag extends ViewFrag {
 				<h4>{{date_time}}</h4>
 			</div>
 			<h5>event description</h5>
-			<a href="event/"></a>
+			<a href="event?event_id={{event_id}}"></a>
 		</div>
 	';
 

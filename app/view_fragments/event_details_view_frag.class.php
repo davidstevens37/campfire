@@ -9,6 +9,7 @@ Class EventDetailsViewFrag extends ViewFrag {
 				<h5>{{theme_name}}</h5>
 				<h4>{{date_time}}</h4>
 			</div>
+			<button value="{{event_id}}">Packing List</button>
 		</div>
 	';
 

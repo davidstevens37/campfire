@@ -29,7 +29,7 @@
 
 	<!-- Include Common Scripts -->
 	<script src="/bower_components/jquery/dist/jquery.js"></script>
-	<script src="/bower_components/ReptileForms/dist/reptileforms.js"></script>
+	<!-- <script src="/bower_components/ReptileForms/dist/reptileforms.js"></script> -->
 
 	<!-- Get JS -->
 	<script>var app = {};app.settings=<?php echo Payload::get_settings(); ?>;</script>

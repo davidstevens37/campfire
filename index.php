@@ -12,10 +12,20 @@ Router::add('/users/register', '/app/controllers/users/register/form.php');
 Router::add('/users/register/process_form/', '/app/controllers/users/register/process_form.php');
 
 // View Event
-Router::add('/event', '/app/controllers/event/view_event.php');
+Router::add('/event', '/app/controllers/events/view_event.php');
 
 // List Events
 Router::add('/events', '/app/controllers/events/list_events.php');
+
+// Create Account
+Router::add('/signup', '/app/controllers/users/create_account.php');
+
+// Login
+Router::add('/login', '/app/controllers/users/login.php');
+
+// Process User
+Router::add('/process_user', '/app/controllers/users/process_user.php');
+
 
 
 

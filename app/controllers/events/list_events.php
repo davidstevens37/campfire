@@ -4,20 +4,33 @@ Class Controller extends AppController {
 	public function init() {
 
 
-		//get events by user id
-		$event_list_results = UserEvent::get_events(1);
+		//get events by user_id
+		$user_event_results = UserEvent::get_events(1);
 
-		if ($event_list_results->num_rows) {
+		// if results are generated
+		if ($user_event_results->num_rows) {
 			
-			while ($row = $event_list_results->fetch_assoc()) {
-				$this->view->event_list .= EventListViewFrag::build($row);
+			// loop over results and render evnet lists
+			while ($row = $user_event_results->fetch_assoc()) {
+
+				switch ($row['status']) {
+					case 'hosting':
+						$this->view->events_hosting .= EventListViewFrag::build($row);
+						break;
+					case 'invited':
+						$this->view->events_invited .= EventListViewFrag::build($row);
+						break;
+					case 'attending':
+						$this->view->events_attending .= EventListViewFrag::build($row);
+						break;
+					case 'not attending':
+						$this->view->events_not_attending .= EventListViewFrag::build($row);
+						break;
+					
+				}
+				
 			}
 		}
-
-
-
-
-
 	}
 }
 $controller = new Controller();
@@ -39,14 +52,61 @@ extract($controller->view->vars);
 
 <main class="board events">
 
+<?php if ($events_hosting): ?>
 	<div>
 		<header>
-			<h2>My Events</h2>
+			<h2>Hosting</h2>
 		</header>
 		<div class="events">
-			<?php echo $event_list; ?>
+			<?php echo $events_hosting; ?>
 		</div>
 	</div>
+<?php endif ?>
+
+<?php if ($events_attending): ?>
+	<div>
+		<header>
+			<h2>Attending</h2>
+		</header>
+		<div class="events">
+			<?php echo $events_attending; ?>
+		</div>
+	</div>
+<?php endif ?>
+
+<?php if ($events_invited): ?>
+	<div>
+		<header>
+			<h2>Invited</h2>
+		</header>
+		<div class="events">
+			<?php echo $events_invited; ?>
+		</div>
+	</div>
+<?php endif ?>
+
+<?php if ($events_not_attending): ?>
+	<div>
+		<header>
+			<h2>Not Attending</h2>
+		</header>
+		<div class="events">
+			<?php echo $events_not_attending; ?>
+		</div>
+	</div>
+<?php endif ?>
+
+<?php if (!$events_hosting && !$events_attending && !$events_invited && !$events_not_attending): ?>
+	<div>
+		<header>
+			<h2>No Events</h2>
+		</header>
+		<div class="events">
+			<p>Try hosting an event! We've already taken care of all the stuff that would normally give you a headache.</p>
+		</div>
+	</div>
+<?php endif ?>
+
 	
 
 </main> <!-- /main.board -->
