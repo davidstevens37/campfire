@@ -3,7 +3,7 @@ Class Controller extends AppController {
 	
 	public function init() {
 
-		
+		// check to make sure logged in
 		if ($user_id = Access::check()) {
 	
 			//get events by user_id
@@ -11,7 +11,14 @@ Class Controller extends AppController {
 
 			// if results are generated
 			if ($user_event_results->num_rows) {
-				
+
+				// fetch row to build user data
+				$row = $user_event_results->fetch_assoc();
+				$this->view->user_info = UserViewFrag::build($row);
+
+				// & return to 1st record.
+				$user_event_results->data_seek(0);
+
 				// loop over results and render evnet lists
 				while ($row = $user_event_results->fetch_assoc()) {
 
@@ -46,18 +53,19 @@ extract($controller->view->vars);
 
 <!-- If not logged in, display message, else display content -->
 <?php if ($not_logged_in): ?>
-	 you must be logged in to view this.
+	 <?php header('Location: /login') ?>
 <?php else: ?>
 
+	<?php echo $user_info; ?>
 
-	<div class="user">
+<!-- 	<div class="user">
 		<div style="background-image: url('/images/1.jpg')"></div>
 		<div class="info">
-			<h2>User Name</h2>
-			<h5>Participating in 5 events</h5>
-			<h4>next event</h4>
+			<h2>{{first_name}} {{last_name}}</h2>
+			<h5>Participating in {{event_count}} events</h5>
+			<h4>{{next_event}}</h4>
 		</div>
-	</div>
+	</div> -->
 
 
 	<main class="board events">

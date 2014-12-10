@@ -77,6 +77,11 @@ button {
 		font-size: 16pt;
 		color: #6B727C;
 
+		i:hover {
+			color: rgba(107, 114, 124, 0.38);
+			cursor: pointer;
+		}
+
 		* {
 			margin-left: 30px;
 		}
@@ -170,6 +175,7 @@ button {
 
 	h5 {
 		color: orange;
+		font-family: 'Open Sans', sans-serif;
 	}
 
 	h4 {

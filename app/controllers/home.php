@@ -17,4 +17,7 @@ extract($controller->view->vars);
 	
 <video autoplay loop muted>
 	<source src="/videos/camping.mp4">
+	<a href="https://www.youtube.com/watch?v=GgSBqCa9v6s">
+    	check the video on YouTube
+  	</a>.
 </video>
