@@ -11,7 +11,8 @@ Class UserEvent extends Model {
 			LEFT JOIN `picture` USING (picture_id)
 			LEFT JOIN `event` USING (event_id)
 			LEFT JOIN `theme` USING (theme_id)
-			WHERE event_id = ' . $event_id
+			WHERE event_id = ' . $event_id . '
+			order by member_status_id'
 			;
 
 		$results = db::execute($sql);
@@ -31,12 +32,14 @@ Class UserEvent extends Model {
 				(SELECT MIN(date_time) 
 					FROM user_event 
 					LEFT JOIN `event` USING (event_id) 
-					WHERE user_id = ' . $user_id . '
-				) AS next_event
+					WHERE member_status_id IN (1,2)
+					AND user_id = ' . $user_id . '
+				) AS next_event,
+			up.picture AS user_picture
 			FROM `user` 
 			LEFT JOIN `user_event` USING (user_id)
 			LEFT JOIN `member_status` USING (member_status_id)
-			LEFT JOIN `picture` USING (picture_id)
+			LEFT JOIN `picture` up ON up.picture_id = user.picture_id
 			LEFT JOIN `event` USING (event_id)
 			LEFT JOIN `theme` USING (theme_id)
 			WHERE user_id = ' . $user_id
