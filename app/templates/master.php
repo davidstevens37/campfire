@@ -8,7 +8,7 @@
 	<title>Page Title</title>
 	
 	<!-- Font Imports -->
-	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Crimson+Text|Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
 	
 	<!-- Main CSS -->
@@ -17,7 +17,6 @@
 
 	<!-- Modernizr -->
 	<script src="/bower_components/modernizr/modernizr.js"></script>
-
 </head>
 <body>
 
@@ -35,6 +34,7 @@
 	<script>var app = {};app.settings=<?php echo Payload::get_settings(); ?>;</script>
 	
 	<!-- Main JS -->
+	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC8H7EJxBW4ii4z77yT_PaYtcJe-s56n8o"></script>
 	<script src="/js/main.js"></script>
 
 </body>

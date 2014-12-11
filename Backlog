@@ -9,6 +9,10 @@ primary:
 
 	add create event controller
 
+	prevent access to events not invited to
+
+	edit delete comments
+
 
 
 
@@ -27,5 +31,4 @@ Extras:
 
 	money tracker (receipt)
 
-
-	
+	weather services

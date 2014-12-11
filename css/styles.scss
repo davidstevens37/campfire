@@ -47,6 +47,42 @@ video {
 }
 
 
+
+#map-canvas {
+	width: auto;
+	height: 600px;
+	margin-top: 20px;
+	margin-left: 250px;
+}
+
+.create-event {
+	form {
+		background-color: white;
+		width: 225px;
+		padding: 10px;
+		float: left;
+
+		h2 {
+			margin-bottom: 20px;
+		}
+
+		> * + * {
+			margin-top: 20px;
+		} 
+
+		select {
+			width: 100%;
+			margin: 20px 0;
+		}
+
+		input {
+			width: 100%;
+			margin-bottom: 20px;
+		}
+	}
+}
+
+
 button {
 	font-family: 'Open Sans', sans-serif;
 	border: 1px solid orange;
@@ -142,7 +178,7 @@ button {
 
 
 // EVENT DETAILS QUICK LOOK
-.event-details, .user {
+.event-details, .user{
 	@include size-bg("",400px,225px);
 	border: 1px solid #DEDEDE;
 	background-color: #FFF;
@@ -412,6 +448,8 @@ footer {
 	right: 0;
 	left: 0;
 	bottom: 0;
+	color: #696D75;
+
 
 }
 .create-account form {
@@ -444,7 +482,7 @@ div.cf {
 	content: "";
 	overflow: hidden;
 }
-label {
+.create-account label {
 	display: block;
 	position: relative;
 	width: 260px;				
@@ -469,7 +507,7 @@ label.small {
 
 
 
-input {
+.create-account input {
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -501,10 +539,6 @@ input {
 }
 .signup-logo .logo {
 	position: initial;
-}
-
-.create-account {
-	color: #696D75;
 }
 
 .create-account p {

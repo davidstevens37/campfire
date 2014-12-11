@@ -32,6 +32,13 @@ Router::add('/auth_login', '/app/controllers/users/auth_login.php');
 // Authenticate User
 Router::add('/logout', '/app/controllers/users/logout.php');
 
+// Add Comment
+Router::add('/add_comment', '/app/controllers/comment/add_comment.php');
+
+// Create Event
+Router::add('/create_event', '/app/controllers/events/create_event.php');
+
+
 
 
 

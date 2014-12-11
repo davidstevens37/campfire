@@ -8,8 +8,12 @@ Class Controller extends AjaxController {
 
 		// if no errors, add new user to DB
 		if (!$safe_data['error']) {
+
 			$user = new User($safe_data);
-			print_r($user);
+
+			if (Access::login($safe_data['username'], $safe_data['password'])) {
+				$this->view['logged_in'] = true;
+			}
 
 		} else {
 
