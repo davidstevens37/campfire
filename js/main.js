@@ -4,30 +4,43 @@
 $(function() {
 
 	// state and pin locations
-	var statePos = { lat: -34.397, lng: 150.644};
-	var pinLocation = { lat: 0, lng: 0};
+	var defaultPos = {
+		lat: 33.72433966174758, 
+		lng: -93.5595703125
+	};
+	var pinLocation = { 
+		lat: null, lng: null
+	};
 
+	// hidden inputs for sending lat and long
+	var latInput = $('.lat'); 
+	var lngInput = $('.lng'); 
+
+	var setCoords = function() {
+		latInput.attr('value', pinLocation.lat);
+		lngInput.attr('value', pinLocation.lng);
+	}
+
+
+
+
+//maps
 	function initialize() {
 
 		// MAP OPTIONS
 		var mapOptions = {
-			center: statePos,
-			zoom: 8,
+			center: defaultPos,
+			zoom: 4,
 			mapTypeId: google.maps.MapTypeId.TERRAIN
 		};
 
-		// BINDS MAP TO DOM
-		var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+	// BINDS MAP TO DOM
+	var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
 
 	var image = {
 		url: 'images/fire_map_icon.png',
-		// This marker is 20 pixels wide by 32 pixels tall.
 		size: new google.maps.Size(20, 32),
-		// The origin for this image is 0,0.
-		// origin: new google.maps.Point(0,0),
-		// The anchor for this image is the base of the flagpole at 0,32.
-		// anchor: new google.maps.Point(0, 32)
 	};
 		// Shapes define the clickable region of the icon.
 		// The type defines an HTML &lt;area&gt; element 'poly' which
@@ -41,7 +54,6 @@ $(function() {
 
 		// MARKER INSTANSIATION AND SETTINGS.
 		var marker = new google.maps.Marker({
-		    position: pinLocation,
 		    title:"'X' Marks the Spot!",
 		    draggable: true,
     		animation: google.maps.Animation.DROP,
@@ -49,30 +61,28 @@ $(function() {
     		// shape: shape
 		});
 
-
 		// SETS PINLOCATION DATA TO CLICKED LOCATION AND DROPS PIN IN THAT SPOT. W/ANIMATION
 		var addMarker = function(event) {
 
 			pinLocation.lat = event.latLng.k;
 			pinLocation.lng = event.latLng.D;
-			console.log(pinLocation);
 			marker.setMap(null);
 			marker.setAnimation(google.maps.Animation.DROP);
 			marker.setPosition(pinLocation);
 			marker.setMap(map);
+			setCoords();
 		}
 
 		// FUNCTION RESETS PINLOCATION DATA AND ALLOWS PIN TO BE REDROPPED W/ANIMATION
 		var dragMarker = function() {
 			
-			pinLocation.lat = marker.getPosition().k
-			pinLocation.lng = marker.getPosition().D
+			pinLocation.lat = marker.getPosition().k;
+			pinLocation.lng = marker.getPosition().D;
 			marker.setMap(null);
 			marker.setAnimation(google.maps.Animation.DROP);
 			marker.setMap(map);
-			console.log(pinLocation);
+			setCoords();
 		}
-
 
 		//EVENT LISTENERS TO MANAGE ADDING MARKER AND MOVING MARKER
 		google.maps.event.addListener(map, 'click', addMarker);
@@ -100,7 +110,7 @@ $(function() {
 
 
 	//form to object:
-	var formToObject = function (form) {
+	var formToObject = function(form) {
         var formData = {};
         $.each(form.serializeArray(), function() {
         	if (this.value) {
@@ -193,5 +203,45 @@ $(function() {
 		})
 		
 	})
+
+
+	// changes event picture when option is selected
+	$('select').on('change', function(event) {
+
+		var selectField = $(this);
+		var optionNumber = parseInt(selectField.val()) + 1;
+		var themePicture = selectField.find('option:nth-child(' + optionNumber + ')' ).attr('data-picture');;
+		console.log(themePicture);
+
+
+		$('.event-picture').attr('style', "background-image: url('" + themePicture + "');");
+	});
+
+
+
+	// ajax for create event
+	$('.create-event').on('submit', 'form', function(event) {
+		event.preventDefault();
+		
+		var form = $(this);
+
+		$.ajax({
+			url: '/process_event',
+			data: formToObject(form)
+		})
+		.done(function(RD) {
+
+			console.log("success");
+			location.href = '/event?event_id=' + RD.event.event_id;
+		})
+		.fail(function() {
+			console.log("error");
+		})
+
+	});
+
+
+
+
 
 });

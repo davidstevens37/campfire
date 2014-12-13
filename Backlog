@@ -2,18 +2,22 @@ Backlog
 
 
 primary:
+
+ 	INVITE USERS!
+
+	create endpoint for create event
 	
 	create item list controller
 
-	comment functionality
-
-	add create event controller
-
 	prevent access to events not invited to
+
+	_ add create event controller
+
+	_ comment functionality
 
 	edit delete comments
 
-
+'https://www.google.com/maps/dir//25.068702, -112.064597'
 
 
 secondary:
@@ -23,7 +27,7 @@ secondary:
 
 Extras:
 
-	integrate maps
+	 _ integrate maps
 
 	integrate text notifications
 

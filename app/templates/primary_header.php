@@ -7,7 +7,7 @@
 			<i class="fa fa-calendar-o"></i>
 			<i class="fa fa-envelope-o"></i>
 			<i class="fa fa-bell-o"></i>
-			<div class="profile-picture"></div>
+			<div class="profile-picture" style='background-image: url("/images/<?php echo $_SESSION['picture_id'] ?>.jpg")'></div>
 		</div>
 <?php endif ?>
 	</div>

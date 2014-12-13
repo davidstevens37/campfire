@@ -41,6 +41,7 @@ Class Access {
 		
 		$_SESSION['user_id'] = $user_data['user_id'];
 		$_SESSION['first_name'] = $user_data['first_name'];
+		$_SESSION['picture_id'] = $user_data['picture_id'];
 	}
 
 

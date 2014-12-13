@@ -24,6 +24,10 @@ Class Comment extends Model {
 
 	public static function get_comments($event_id) {
 
+		if (!is_numeric($event_id)) {
+			return null;
+		}
+		
 		$sql = 
 			'SELECT * FROM `comment` 
 			LEFT JOIN `user` USING (user_id)

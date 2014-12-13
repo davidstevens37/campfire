@@ -8,7 +8,7 @@ Class Controller extends AppController {
 		/**
 		 *	Comments
 		 */
-
+		
 		// Get comments from event_id
 		$comment_results = Comment::get_comments($event_id);
 
@@ -23,7 +23,7 @@ Class Controller extends AppController {
 
 
 		/**
-		 *	Event details and group members
+		 *	group members
 		 */
 
 		// Get event members
@@ -36,13 +36,19 @@ Class Controller extends AppController {
 				$this->view->members .= MemberViewFrag::build($row);
 			}
 
-			// move incrementer back to 1st record and build event details
-			$user_event_results->data_seek(0);
-
-			$row = $user_event_results->fetch_assoc();
-			
-			$this->view->event_details = EventDetailsViewFrag::build($row);
 		}
+
+		/**
+		 *	Event Details
+		 */
+
+		// if Get event successful
+		if ($event_results = Event::get_event($event_id)) {
+
+			// Generate/render event details
+			$this->view->event_details .= EventDetailsViewFrag::build($event_results);
+		}
+		
 
 	}
 }

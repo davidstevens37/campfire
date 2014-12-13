@@ -4,7 +4,9 @@ Class Controller extends AppController {
 	public function init() {
 
 		// check to make sure logged in
-		if ($user_id = Access::check()) {
+		if (!$user_id = Access::check()) {
+			$this->view->not_logged_in = true;
+		} else {
 	
 			//get events by user_id
 			$user_event_results = UserEvent::get_events($user_id);
@@ -14,16 +16,20 @@ Class Controller extends AppController {
 
 				// fetch row to build user data
 				$row = $user_event_results->fetch_assoc();
+
+				//if next ext event is null, replace with n/a
 				$row['next_event'] = $row['next_event'] ? : 'n/a';
+
+				//build user data
 				$this->view->user_info = UserInfoViewFrag::build($row);
 
-				// & return to 1st record.
+				// return to 1st record.
 				$user_event_results->data_seek(0);
 
-				// loop over results and render evnet lists
+				// loop over results and render evnet lists based on their status
 				while ($row = $user_event_results->fetch_assoc()) {
-
-					switch ($row['status']) {
+					
+					switch ($this->view->event_present = $row['status']) {
 						case 'hosting':
 							$this->view->events_hosting .= EventListViewFrag::build($row);
 							break;
@@ -40,9 +46,16 @@ Class Controller extends AppController {
 					}
 					
 				}
+
+				$this->view->events = [
+					'Hosting' => $this->view->events_hosting,
+					'Invited' => $this->view->events_invited,
+					'Attending' => $this->view->events_attending,
+					'Not Attending' => $this->view->events_not_attending
+				];
+				
+				
 			}
-		} else {
-			$this->view->not_logged_in = TRUE;
 		}
 	}
 }
@@ -62,55 +75,25 @@ extract($controller->view->vars);
 
 	<main class="board events">
 
-	<!-- If cases to not display event catagories that user does not contain events in  -->
+	<?php if ($event_present): ?>  <!-- if event is present -->
 
-	<?php if ($events_hosting): ?>
-		<div>
-			<header>
-				<h2>Hosting</h2>
-			</header>
-			<div class="events">
-				<?php echo $events_hosting; ?>
-			</div>
-		</div>
-	<?php endif ?>
+		<!-- loop over events array and display data if present -->
+		<?php foreach ($events as $key => $value) { ?>
 
-	<?php if ($events_attending): ?>
-		<div>
-			<header>
-				<h2>Attending</h2>
-			</header>
-			<div class="events">
-				<?php echo $events_attending; ?>
-			</div>
-		</div>
-	<?php endif ?>
+			<?php if ($value): ?>
+				<div>
+					<header>
+						<h2><?php echo $key ?></h2>
+					</header>
+					<div class="events">
+						<?php echo $value; ?>
+					</div>
+				</div>
+			<?php endif ?>
 
-	<?php if ($events_invited): ?>
-		<div>
-			<header>
-				<h2>Invited</h2>
-			</header>
-			<div class="events">
-				<?php echo $events_invited; ?>
-			</div>
-		</div>
-	<?php endif ?>
+		<?php } ?>  <!-- end loop -->
 
-	<?php if ($events_not_attending): ?>
-		<div>
-			<header>
-				<h2>Not Attending</h2>
-			</header>
-			<div class="events">
-				<?php echo $events_not_attending; ?>
-			</div>
-		</div>
-	<?php endif ?>
-
-
-	<!-- If no events, display no events found message. -->
-	<?php if (!$events_hosting && !$events_attending && !$events_invited && !$events_not_attending): ?>
+	<?php else: ?><!-- If no events, display no events found message. -->
 		<div>
 			<header>
 				<h2>No Events</h2>
@@ -121,8 +104,7 @@ extract($controller->view->vars);
 		</div>
 	<?php endif ?>
 
-		
+
 
 	</main> <!-- /main.board -->
-
 <?php endif ?>

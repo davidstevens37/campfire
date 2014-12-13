@@ -38,6 +38,9 @@ Router::add('/add_comment', '/app/controllers/comment/add_comment.php');
 // Create Event
 Router::add('/create_event', '/app/controllers/events/create_event.php');
 
+// Create Event
+Router::add('/process_event', '/app/controllers/events/process_event.php');
+
 
 
 
