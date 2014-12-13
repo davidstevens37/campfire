@@ -28,21 +28,28 @@ Class Controller extends AppController {
 
 				// loop over results and render evnet lists based on their status
 				while ($row = $user_event_results->fetch_assoc()) {
-					
-					switch ($this->view->event_present = $row['status']) {
-						case 'hosting':
-							$this->view->events_hosting .= EventListViewFrag::build($row);
-							break;
-						case 'invited':
-							$this->view->events_invited .= EventListViewFrag::build($row);
-							break;
-						case 'attending':
-							$this->view->events_attending .= EventListViewFrag::build($row);
-							break;
-						case 'not attending':
-							$this->view->events_not_attending .= EventListViewFrag::build($row);
-							break;
-						
+
+					// if event is past, place it into the past events catagory
+					if ($row['date_time'] < $row['now']) {
+						$this->view->events_past .= EventListViewFrag::build($row);
+					} else {
+
+						// present events 
+						switch ($this->view->event_present = $row['status']) {
+							case 'hosting':
+								$this->view->events_hosting .= EventListViewFrag::build($row);
+								break;
+							case 'invited':
+								$this->view->events_invited .= EventListViewFrag::build($row);
+								break;
+							case 'attending':
+								$this->view->events_attending .= EventListViewFrag::build($row);
+								break;
+							case 'not attending':
+								$this->view->events_not_attending .= EventListViewFrag::build($row);
+								break;
+							
+						}
 					}
 					
 				}
@@ -51,7 +58,8 @@ Class Controller extends AppController {
 					'Hosting' => $this->view->events_hosting,
 					'Invited' => $this->view->events_invited,
 					'Attending' => $this->view->events_attending,
-					'Not Attending' => $this->view->events_not_attending
+					'Not Attending' => $this->view->events_not_attending,
+					'Past Events' => $this->view->events_past
 				];
 				
 				
@@ -75,7 +83,7 @@ extract($controller->view->vars);
 
 	<main class="board events">
 
-	<?php if ($event_present): ?>  <!-- if event is present -->
+	<?php if ($event_present || $events_past): ?>  <!-- if event is present -->
 
 		<!-- loop over events array and display data if present -->
 		<?php foreach ($events as $key => $value) { ?>

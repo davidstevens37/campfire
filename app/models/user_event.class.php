@@ -76,6 +76,7 @@ Class UserEvent extends Model {
 					WHERE member_status_id IN (1,2)
 					AND user_id = ' . $user_id . ' AND date_time > NOW()
 				) AS next_event,
+			NOW() AS now,
 			up.picture AS user_picture
 			FROM `user` 
 			LEFT JOIN `user_event` USING (user_id)
