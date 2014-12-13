@@ -59,7 +59,16 @@ extract($controller->view->vars);
 ?>
 
 <!-- Event Details / Quick Look -->
+
 <?php echo $event_details; ?>
+
+	<input class="invite" list="users" type="text">
+	<datalist id="users">
+		<option value="time">
+		<option value="bob">
+		<option value="test">
+	</datalist>
+
 
 <!-- Group Members - Invitees // Attendees // Host -->
 <div class="group">

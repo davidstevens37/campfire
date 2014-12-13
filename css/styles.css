@@ -133,7 +133,8 @@ button {
   height: initial;
   width: 1060px;
   min-height: 600px;
-  margin: auto; }
+  margin: auto;
+  position: relative; }
   .page:after {
     content: " ";
     clear: both;
@@ -168,6 +169,14 @@ button {
 .info h4 {
   color: #808080;
   margin-bottom: 15px; }
+
+.invite {
+  border: 1px solid #DEDEDE;
+  position: absolute;
+  top: 355px;
+  left: 30px;
+  width: 195px;
+  min-height: 30px; }
 
 .group {
   float: right;

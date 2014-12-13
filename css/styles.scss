@@ -183,6 +183,7 @@ button {
 	@include size-bg(200px,initial,1060px);;
 	min-height: 600px;
 	margin: auto;
+	position: relative;
 	&:after {
 		content: " ";
 		clear: both;
@@ -234,6 +235,22 @@ button {
 		margin-bottom: 15px;
 	}
 }
+
+
+
+.invite {
+	border: 1px solid #DEDEDE;
+	position: absolute;
+	top: 355px;
+	left: 30px;
+	width: 195px;
+	min-height: 30px;
+}
+
+
+
+
+
 
 
 //MEMBERS ATTENDING
