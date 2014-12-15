@@ -24,8 +24,85 @@
 	</header><!-- /header -->
 	<div class="page">
 
+		<div class="my-items">
+			<header>
+				<h2>Items I'm Bringing</h2>
+			</header>
+			<div class="items">	
+				<h4>an item imtem im ttem im ttem im t taking</h4>
+				<h4>an item im taking</h4>
+				<h4>an item im taking</h4>
+				<h4>an item im taking</h4>
+				<h4>an item im taking</h4>
+				<h4>an item im taking</h4>
+				<h4>an item im taking</h4>
+				<h4>an item im taking</h4>
+				<h4>an item im taking</h4>
+				<h4>an item im taking</h4>
+				<h4>an item im taking</h4>
+				<h4>an item im taking</h4>
+				<h4>an item im taking</h4>
+				<h4>an item im taking</h4>
+				<h4>an item im taking</h4>
+				<h4>an item im taking</h4>
+				<h4>an item im taking</h4>
+				<h4>an item im taking</h4>
+				<h4>an item im taking</h4>
+				<h4>an item im taking</h4>
+				<h4>an item im taking</h4>
+				<h4>an item im taking</h4>
+				<h4>an item im taking</h4>
+				<h4>an item im taking</h4>
 
+			</div>
+		</div> 
 
+	<!-- Group Members - Invitees // Attendees // Host -->
+	<div class="other-member-items">
+		<header>
+			<h2>Claimed by Members</h2>
+		</header>
+		<div class="items">
+			<h4>an item someone else is takingsomeone else is takingsomeone else is taking</h4>
+			<h4>an item someone else is taking</h4>
+			<h4>an item someone else is taking</h4>
+			<h4>an item someone else is taking</h4>
+			<h4>an item someone else is taking</h4>
+			<h4>an item someone else is taking</h4>
+			<h4>an item someone else is taking</h4>
+			<h4>an item someone else is taking</h4>
+		</div>
+	</div>
+
+	<!--  Main Event Board /unclaimed item-->
+	<main class="board">
+		<div class="new-item">
+			<header>
+				<h2>Add items to the list</h2>
+			</header>
+			<div>
+				<textarea name="comment" data-event-id="<?php echo $event_id; ?>"></textarea>
+				<button>Submit</button>
+			</div>
+		</div>
+		<div class="unclaimed-items">
+		<header>
+			<h2>Unclaimed Items</h2>
+		</header>
+		<div>
+			<h4>unclaimed item</h4>
+			<h4>unclaimed item</h4>
+			<h4>unclaimed item</h4>
+			<h4>unclaimed item</h4>
+			<h4>unclaimed item</h4>
+			<h4>unclaimed item</h4>
+			<h4>unclaimed item</h4>
+			<h4>unclaimed item</h4>
+			<h4>unclaimed item</h4>
+			<h4>unclaimed item</h4>
+		</div>
+	</div>
+	</main><!-- /main.board -->
 
 		
 

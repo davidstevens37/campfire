@@ -332,7 +332,7 @@ img {
 		}
 	}
 
-	.new-comment {
+	.new-comment, .new-item {
 		position: relative;
 		&:after {
 			content: "";
@@ -347,7 +347,7 @@ img {
 	}
 
 
-	.comment {
+	.comment{
 		header {
 			div {
 				background-size: cover;
@@ -371,6 +371,12 @@ img {
 	&.events {
 		margin-left: 255px;
 		width: 75%;
+
+		h5 {
+			max-height: 130px;
+			overflow: hidden;
+			padding-left: 10px;
+		}
 	}
 
 }
@@ -582,4 +588,38 @@ label.small {
 		font-size: initial;
 		color: inherit;
 	}
+}
+
+
+
+.my-items {
+	float: left;
+	width: 225px;
+	min-height: 400px;
+	background-color: white;
+	border: 1px solid #DEDEDE;
+	margin-left: 15px;
+	border-radius: 3px;
+
+}
+
+
+.other-member-items {
+	float: right;
+	width: 225px;
+}
+
+.my-items header {
+	padding: 10px;
+	border-bottom: 1px solid #ddd;
+	min-height: 53px;
+	h2 {
+		font-weight: lighter;
+	}
+}
+
+.no-items {
+	font-style: italic;
+	text-align: center;
+	color: #DEDEDE;
 }

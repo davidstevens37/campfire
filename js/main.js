@@ -42,15 +42,6 @@ $(function() {
 		url: 'images/fire_map_icon.png',
 		size: new google.maps.Size(20, 32),
 	};
-		// Shapes define the clickable region of the icon.
-		// The type defines an HTML &lt;area&gt; element 'poly' which
-		// traces out a polygon as a series of X,Y points. The final
-		// coordinate closes the poly by connecting to the first
-		// coordinate.
-		var shape = {
-		  coords: [1, 1, 1, 20, 18, 20, 18 , 1],
-		  type: 'poly'
-	};
 
 		// MARKER INSTANSIATION AND SETTINGS.
 		var marker = new google.maps.Marker({
@@ -58,7 +49,6 @@ $(function() {
 		    draggable: true,
     		animation: google.maps.Animation.DROP,
     		icon: image,
-    		// shape: shape
 		});
 
 		// SETS PINLOCATION DATA TO CLICKED LOCATION AND DROPS PIN IN THAT SPOT. W/ANIMATION
