@@ -67,8 +67,9 @@ Class UserEvent extends Model {
 		$sql = 
 			'SELECT *, 
 				(SELECT COUNT(event_id) 
-					FROM user_event 
-					WHERE user_id = ' . $user_id . '
+					FROM user_event
+					LEFT JOIN `event` USING (event_id)  
+					WHERE user_id = ' . $user_id . ' AND date_time > NOW()
 				) AS event_count,
 				(SELECT MIN(date_time) 
 					FROM user_event 

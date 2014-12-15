@@ -17,12 +17,12 @@ primary:
 
 	edit delete comments
 
-'https://www.google.com/maps/dir//25.068702, -112.064597'
+	_ 'https://www.google.com/maps/dir//25.068702, -112.064597'
 
 
 secondary:
 
-	make expired events catagory
+	_ make expired events catagory
 
 
 Extras:

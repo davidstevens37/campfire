@@ -28,28 +28,28 @@ extract($controller->view->vars);
 
 		</div>
 		<label>
-			<i class="fa fa-user"></i> <input name="username" placeholder="Username" type="text">
+			<i class="fa fa-user"></i> <input name="username" placeholder="Username" type="text" tabindex="1">
 		</label>
 		<label>
-			<i class="fa fa-lock"></i> <input name="password" placeholder="Password" type="password">
+			<i class="fa fa-lock"></i> <input name="password" placeholder="Password" type="password" tabindex="2">
 		</label>
 		<label>
-			<i class="fa fa-envelope-o"></i> <input name="email" placeholder="Email Address" type="email">
+			<i class="fa fa-envelope-o"></i> <input name="email" placeholder="Email Address" type="email" tabindex="3">
 		</label>
 		<label>
-			<i class="fa fa-phone"></i> <input name="phone" placeholder="Mobile Number (optional)" type="tel">
+			<i class="fa fa-phone"></i> <input name="phone" placeholder="Mobile Number (optional)" type="tel" tabindex="4">
 		</label>
 		<label class="small">
-			<sup>Last</sup> <input name="last_name" placeholder="Last Name" type="text">
+			<sup>Last</sup> <input name="last_name" placeholder="Last Name" type="text" tabindex="6">
 		</label>
 		<label class="small">
-			1<sup>st</sup> <input name="first_name" placeholder="First Name" type="text">
+			1<sup>st</sup> <input name="first_name" placeholder="First Name" type="text" tabindex="5">
 		</label>
 		<label class="small">
-			<i class="fa fa-birthday-cake"></i> <input name="age" placeholder="Age" type="number">
+			<i class="fa fa-birthday-cake"></i> <input name="age" placeholder="Age" type="number" tabindex="8">
 		</label>
 		<label class="small">
-			<i class="fa fa-map-marker"></i> <input name="zipcode" placeholder="Zipcode" type="number">
+			<i class="fa fa-map-marker"></i> <input name="zipcode" placeholder="Zipcode" type="number" tabindex="7">
 		</label>
 		<div class="cf"></div>
 		<button>Setup Camp</button>

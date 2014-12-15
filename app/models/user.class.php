@@ -83,4 +83,15 @@ class User extends Model {
 
 	}
 
+	public static function get_all_users() {
+
+		$sql = 
+			'SELECT * FROM `user`'
+			;
+
+		$results = db::execute($sql);
+
+		return $results;
+	}
+
 }

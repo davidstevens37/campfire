@@ -99,6 +99,73 @@ $(function() {
 
 
 
+    // function to select all text in an element.
+	jQuery.fn.selectText = function(){
+	    var doc = document;
+	    var element = this[0];
+	    console.log(this, element);
+	    if (doc.body.createTextRange) {
+	        var range = document.body.createTextRange();
+	        range.moveToElementText(element);
+	        range.select();
+	    } else if (window.getSelection) {
+	        var selection = window.getSelection();        
+	        var range = document.createRange();
+	        range.selectNodeContents(element);
+	        selection.removeAllRanges();
+	        selection.addRange(range);
+	    }
+	};
+
+
+    // edit bulletin board on focus
+	$('.bulletin p').on('focus', function(event) {
+		
+		var bulletin = $(this)
+    	var defaultText = 'Click here to edit the description.';
+
+    	console.log(bulletin.text())
+    	if ($.trim($(this).text()) == defaultText) {
+    		bulletin.selectText();
+    	};
+    	
+    });
+
+    // on bulletin blur, ajax to update the bulletin board.
+    $('.bulletin p').on('blur', function(event) {
+    	console.log('blur');
+    	var description = $(this).text();
+    	var eventId = $(this).attr('data-event-id');
+
+    	$.ajax({
+    		url: '/process_event_description',
+    		data: {
+    			'description': description,
+    			'event_id': eventId
+    		},
+    	})
+    	.done(function() {
+    		if (description == "") {
+    			$('.bulletin p').text('Click here to edit the description.');
+    		};
+    	})
+    	.fail(function() {
+    		console.log("error");
+    	})
+    	
+
+    });
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -239,8 +306,6 @@ $(function() {
 		})
 
 	});
-
-
 
 
 

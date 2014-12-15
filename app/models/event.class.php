@@ -46,4 +46,18 @@ Class Event extends Model {
 		return $results->num_rows ? $results->fetch_assoc() : null;
 	}
 
+
+	public static function update_description($event_id, $description) {
+
+
+		$sql_values = ['description' => $description];
+
+		$sql_where = ' WHERE event_id = ' . $event_id;
+
+		// Ensure values are encompassed with quote marks
+		$sql_values = db::auto_quote($sql_values);
+
+		return db::update('event', $sql_values, $sql_where);
+
+	}
 }
