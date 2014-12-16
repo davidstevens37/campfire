@@ -52,6 +52,15 @@ Router::add('/logout', '/app/controllers/users/logout.php');
 
 
 
+  	
+/****************************************
+*    User_Event       
+*****************************************/
+	
+// Action Invitaions
+Router::add('/action_invitation', '/app/controllers/user_event/action_invitation.php');
+
+
 
 
 

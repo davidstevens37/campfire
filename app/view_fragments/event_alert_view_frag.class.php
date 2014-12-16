@@ -5,8 +5,8 @@ Class EventAlertViewFrag extends ViewFrag {
 		<div class="event-alert">
 			<a href="event?event_id={{event_id}}"></a>
 			<div class="actions">
-				<button class="accept" data-event-id="{{event_id}}">I\'m There!</button>
-				<button class="decline" data-event-id="{{event_id}}">No, Thanks</button>
+				<button class="accept" data-event-id="{{event_id}}" data-member-status-id="2">I\'m There!</button>
+				<button class="decline" data-event-id="{{event_id}}" data-member-status-id="4">No, Thanks</button>
 			</div>
 			<div class="picture" style="background-image: url(\'{{theme_picture}}\')"></div>
 			<div class="info-alert">

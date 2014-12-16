@@ -7,6 +7,8 @@
 Class Controller extends AppController {
 	public function init() {
 
+		$user_id = Access::check();
+
 		$event_id = $_GET['event_id'];
 
 
@@ -52,7 +54,11 @@ Class Controller extends AppController {
 
 				// loop over results and render view per resutls
 				while($row = $comment_results->fetch_assoc()) { 
-					$this->view->comments .= CommentViewFrag::build($row);
+					if ($row['user_id'] == $user_id) {
+						$this->view->comments .= SelfCommentViewFrag::build($row);
+					} else {
+						$this->view->comments .= CommentViewFrag::build($row);
+					}
 				}
 			}
 
@@ -133,7 +139,7 @@ extract($controller->view->vars);
 				<h2>Comment Board</h2>
 			</header>
 			<div>
-				<textarea name="comment" data-event-id="<?php echo $event_id; ?>"></textarea>
+				<textarea name="comment" placeholder="Click here to post a comment." data-event-id="<?php echo $event_id; ?>"></textarea>
 				<button>Submit</button>
 			</div>
 		</div>

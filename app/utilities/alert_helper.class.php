@@ -17,7 +17,7 @@ Abstract Class AlertHelper {
 					$event_alerts .= EventAlertViewFrag::build($event);
 				}
 			} else {
-				$event_alerts = '<p class="no-notifications">(none)</p>';
+				$event_alerts = '<h4 class="no-items">(none)</h4>';
 			}
 
 			return $event_alerts;

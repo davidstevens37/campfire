@@ -5,11 +5,11 @@ Class UserEvent extends Model {
 
 	public static function insert($input) {
 
-
+		//member status 3 = invited
 		$sql_values = [
 			'event_id' => $input['event_id'],
-			'member_status_id' => 1,
-			'user_id' => Access::check(),
+			'user_id' => $input['user_id'],
+			'member_status_id' => 3,
 		];
 
 		// Ensure values are encompassed with quote marks
@@ -114,6 +114,31 @@ Class UserEvent extends Model {
 
 		return $results;
 	}
+
+	public static function change_status($event_id, $status) {
+
+		// ensures event id is numeric
+		if (!is_numeric($event_id)) {
+			return null;
+		}
+
+		//  ensures claimed by is numeric if given
+		if (!is_numeric($status)) {
+			return null;
+		}
+		
+
+		$sql_values = ['member_status_id' => $status];
+
+		$sql_where = ' WHERE event_id = ' . $event_id . ' AND user_id = ' . Access::check();
+
+		// Ensure values are encompassed with quote marks
+		$sql_values = db::auto_quote($sql_values);
+
+		return db::update('user_event', $sql_values, $sql_where);
+
+	}
+
 }
 
 ?>

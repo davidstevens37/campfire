@@ -9,9 +9,9 @@ primary:
 
 	prevent access to events not invited to
 
-	accept and decline invitations
+	_ accept and decline invitations
 
-	RED DOT INDICATOR FOR NOTIFICATIONS
+	_ RED DOT INDICATOR FOR NOTIFICATIONS
 	
 
 
@@ -46,3 +46,16 @@ Extras:
 	money tracker (receipt)
 
 	weather services
+
+
+
+-----
+_ outline 
+
+_ notify users of actions and errors
+
+video
+
+highlight section color
+
+expand input, remove border, add placholder 

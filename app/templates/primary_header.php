@@ -5,8 +5,10 @@
 //  If user is logged in, get notifications
 $event_alerts = ($user_id = Access::check()) ? AlertHelper::get_notifications() : null ; 
 
-$num_alerts = AlertHelper::$notifications ? : null;
-$alert = $num_alerts ? 'alert' : null;
+$alert = AlertHelper::$notifications ? 'alert' : null;
+
+// $num_alerts = AlertHelper::$notifications ? : null;
+// $alert = $num_alerts ? 'alert' : null;
 ?>
 
 <header class="main-header">
@@ -20,7 +22,7 @@ $alert = $num_alerts ? 'alert' : null;
 				<i class="fa fa-bell-o notification-indicator <?php echo $alert ?>"></i>
 				<div class="notifications">
 					<header>
-						<h2>Event Invitations (<?php echo $num_alerts ?>)</h2>
+						<h2>Event Invitations</h2>
 					</header>
 					<div class="events">
 						<?php echo $event_alerts; ?>

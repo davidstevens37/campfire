@@ -337,6 +337,43 @@ $(function() {
 
 
 
+	// accepting/declining an event
+	$('.notifications').on('click', 'button', function(event) {
+
+		var button = $(this);
+
+		$.ajax({
+			url: '/action_invitation',
+			data: {
+				event_id: button.attr('data-event-id'),
+				member_status_id: button.attr('data-member-status-id'),
+			},
+		})
+		.done(function() {
+			console.log("success");
+
+			removeItem( $('.notifications .events'), button.parents('.event-alert') );
+
+
+
+		})
+		.fail(function() {
+			console.log("error");
+		})
+		
+
+	});
+
+
+
+
+
+
+
+
+
+
+
 
 
 
