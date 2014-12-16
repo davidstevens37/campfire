@@ -3,7 +3,11 @@
  *  Header Template
  */
 //  If user is logged in, get notifications
-$event_alerts = ($user_id = Access::check()) ? AlertHelper::get_notifications() : null ; ?>
+$event_alerts = ($user_id = Access::check()) ? AlertHelper::get_notifications() : null ; 
+
+$num_alerts = AlertHelper::$notifications ? : null;
+$alert = $num_alerts ? 'alert' : null;
+?>
 
 <header class="main-header">
 
@@ -13,10 +17,10 @@ $event_alerts = ($user_id = Access::check()) ? AlertHelper::get_notifications() 
 		<div class="icons">
 			<div class="profile-picture" style='background-image: url("/images/<?php echo $_SESSION['picture_id'] ?>.jpg")'></div>
 			<div>
-				<i class="fa fa-bell-o notification-indicator"></i>
+				<i class="fa fa-bell-o notification-indicator <?php echo $alert ?>"></i>
 				<div class="notifications">
 					<header>
-						<h2>Event Invitations</h2>
+						<h2>Event Invitations (<?php echo $num_alerts ?>)</h2>
 					</header>
 					<div class="events">
 						<?php echo $event_alerts; ?>

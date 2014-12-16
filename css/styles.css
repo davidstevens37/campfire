@@ -91,6 +91,8 @@ button {
   .main-header i:hover {
     color: rgba(107, 114, 124, 0.38);
     cursor: pointer; }
+  .main-header i.alert:hover {
+    color: #8e661c; }
   .main-header .profile-picture {
     display: inline-block;
     height: 40px;
@@ -113,6 +115,16 @@ button {
       display: inline-block;
       padding: 10px;
       text-decoration: none; }
+
+.alert-bubble {
+  font-family: 'Open Sans', sans-serif;
+  color: white;
+  font-size: 8pt;
+  vertical-align: super;
+  background-color: #F3313A;
+  border-radius: 3px;
+  padding: 0 2px;
+  box-shadow: 1px 1px 4px -2px black; }
 
 .notifications {
   position: relative; }
@@ -186,6 +198,10 @@ button {
     border-left: 20px solid transparent;
     border-right: 20px solid transparent;
     border-bottom: 10px solid white; }
+
+.alert {
+  color: rgba(243, 49, 58, 0.85);
+  color: orange; }
 
 .logo {
   position: absolute;

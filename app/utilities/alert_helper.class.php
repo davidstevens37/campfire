@@ -1,6 +1,10 @@
 <?php 
 
-Class AlertHelper {
+Abstract Class AlertHelper {
+
+	public static $notifications;
+
+
 
 	public static function get_notifications() {
 
@@ -8,7 +12,7 @@ Class AlertHelper {
 
 			$event_notifications = UserEvent::get_invites($user_id);
 
-			if ($event_notifications->num_rows) {
+			if (self::$notifications = $event_notifications->num_rows) {
 				while ($event = $event_notifications->fetch_assoc()) {
 					$event_alerts .= EventAlertViewFrag::build($event);
 				}
@@ -20,11 +24,6 @@ Class AlertHelper {
 		} else {
 			return null;
 		}
-
-
-
-
-
 
 
 
