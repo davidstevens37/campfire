@@ -2,7 +2,11 @@
 Class EventItemViewFrag extends ViewFrag {
 
 	protected $template = '	
-		<h4 class="item" data-event-item-id="{{event_item_id}}">{{name}}</h4>
+		<div class="item">
+			<button class="group-remove" data-event-item-id="{{event_item_id}}">remove</button>
+			<button class="claim" data-event-item-id="{{event_item_id}}">claim</button>
+			<h4>{{name}}</h4>
+		</div>
 	';
 
 }

@@ -7,21 +7,53 @@
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	<link href='http://fonts.googleapis.com/css?family=Crimson+Text|Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="/css/styles.css">
+
+
+
+
+
+
+
 </head>
 <body>
-	<header class="main-header">
-		<div class="container">
-			<a href="#" class="logo" title="">Camp<span>fire</span> <img src="/images/1.jpg" alt=""></a>
-			<div class="profile-picture"></div>
+<header class="main-header">
+
+	<div class="container">
+		<a href="/" class="logo" title="">Camp<span>fire</span> <img src="/images/fire.png" alt=""></a>
+
+		<div class="icons">
+			<div class="profile-picture" style='background-image: url("/images/<?php echo $_SESSION['picture_id'] ?>.jpg")'></div>
+			<div>
+				<i class="fa fa-bell-o"></i>
+				<div class="notifications">
+					<header>
+						<h2>Event Invitations</h2>
+					</header>
+				</div>
+			</div>
+			<div>
+				<i class="fa fa-envelope-o"></i>
+			</div>
+			<div>
+				<i class="fa fa-calendar-o"></i>
+			</div>
 		</div>
-		<nav>
-			<a href="">Home</a>
-			<a href="">Create Event</a>
-			<a href="">link</a>
-			<a href="">link</a>
-			<a href="">link</a>
-		</nav>
-	</header><!-- /header -->
+
+	</div>
+
+	<nav>
+		<!-- <a href="/">Home</a> -->
+		<a href="/events">My Events</a>
+		<a href="/create_event">Create Event</a>
+		<a href="">link</a>
+
+		<a href="/logout">Logout</a>
+
+		<a href="/signup">Sign Up</a>
+		<a href="/login">Login</a>
+
+	</nav>
+</header><!-- /header -->
 	<div class="page">
 
 		<div class="my-items">

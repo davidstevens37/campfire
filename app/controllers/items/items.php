@@ -34,11 +34,11 @@ Class Controller extends AppController {
 						case null:
 							$this->view->unclaimed_items .= EventItemViewFrag::build($event_item);
 							break;
-						case $event_id:
-							$this->view->my_items .= EventItemViewFrag::build($event_item);
+						case $user_id:
+							$this->view->my_items .= EventItemSelfClaimedViewFrag::build($event_item);
 							break;						
 						default:
-							$this->view->claimed_items .= EventItemViewFrag::build($event_item);
+							$this->view->claimed_items .= EventItemClaimedViewFrag::build($event_item);
 							break;
 					}
 				}
@@ -49,14 +49,6 @@ Class Controller extends AppController {
 
 
 		}
-
-
-
-
-
-
-
-
 
 	}
 }
@@ -76,7 +68,7 @@ extract($controller->view->vars);
 	<!-- Group Members - Invitees // Attendees // Host -->
 	<div class="other-member-items">
 		<header>
-			<h2>Claimed by Members</h2>
+			<h2>Already Claimed</h2>
 		</header>
 		<div class="items">
 			<?php echo $claimed_items ? : $no_items; ?>
@@ -90,7 +82,7 @@ extract($controller->view->vars);
 				<h2>Add items to the list</h2>
 			</header>
 			<div>
-				<textarea name="comment" data-event-id="<?php echo $event_id; ?>"></textarea>
+				<textarea class="add-item" data-event-id="<?php echo $event_id; ?>"></textarea>
 				<button>Submit</button>
 			</div>
 		</div>
@@ -102,3 +94,21 @@ extract($controller->view->vars);
 			<?php echo $unclaimed_items ? : $no_items; ?>
 		</div>
 	</div>
+
+
+
+<!-- handlebars templates -->
+<script id="my-item" type="text/x-handlebars-template">
+	<div class="item">
+		<button class="self-remove" data-event-item-id="{{event_item_id}}">unclaim</button>
+		<h4>{{name}}</h4>
+	</div>
+</script>
+
+<script id="unclaimed-item" type="text/x-handlebars-template">
+	<div class="item">
+		<button class="group-remove" data-event-item-id="{{event_item_id}}">remove</button>
+		<button class="claim" data-event-item-id="{{event_item_id}}">claim</button>
+		<h4>{{name}}</h4>
+	</div>
+</script>

@@ -93,6 +93,27 @@ Class UserEvent extends Model {
 		return $results;
 	}
 
+
+	public static function get_invites($user_id) {
+
+		if (!is_numeric($user_id)) {
+			return null;
+		}
+
+		$sql = 
+			'SELECT *
+			FROM `user` 
+			LEFT JOIN `user_event` USING (user_id)
+			LEFT JOIN `member_status` USING (member_status_id)
+			LEFT JOIN `event` USING (event_id)
+			LEFT JOIN `theme` USING (theme_id)
+			WHERE date_time > NOW() AND member_status_id = 3 AND user_id = ' . $user_id
+			;
+
+		$results = db::execute($sql);
+
+		return $results;
+	}
 }
 
 ?>

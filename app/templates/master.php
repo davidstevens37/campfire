@@ -35,6 +35,7 @@
 	
 	<!-- Main JS -->
 	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC8H7EJxBW4ii4z77yT_PaYtcJe-s56n8o"></script>
+	<script src="/bower_components/handlebars/handlebars.min.js"></script>
 	<script src="/js/main.js"></script>
 
 </body>

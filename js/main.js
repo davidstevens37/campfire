@@ -89,6 +89,24 @@ $(function() {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // function to select all text in an element.
 	jQuery.fn.selectText = function(){
 	    var doc = document;
@@ -149,6 +167,18 @@ $(function() {
 
 
 
+    $('.notification-indicator').click(function(event) {
+    	$('.notifications').toggleClass('active');
+    	console.log('click');
+    });
+
+
+
+
+
+    $('.packing-list').click(function(event) {
+    	location.href = '/items?event_id=' + app.settings.event_id;
+    });
 
 
 
@@ -161,9 +191,13 @@ $(function() {
 
 
 
+    var renderTemplate = function(templateId, object) {
+    	var source = $(templateId).html();
+    	var template = Handlebars.compile(source);
+    	var output = template(object);
+    	return output;
 
-
-
+    }
 
 
 	//form to object:
@@ -295,6 +329,167 @@ $(function() {
 			console.log("error");
 		})
 
+	});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	var	appendItem = function(elem, item) {
+		if (elem.find('.no-items').length) {
+			elem.html(item);
+		} else {
+			elem.append(item);
+		}
+	};
+
+	var removeItem = function(elem, item) {
+
+		item.remove();
+
+		if (!elem[0].childElementCount) {
+			elem.append('<h4 class="no-items">(none)</h4>');
+		} 
+	}
+
+	// ajax for unclaiming item
+	$('.my-items').on('click', 'button', function(event) {
+		event.preventDefault();
+		
+		var button = $(this);
+
+		$.ajax({
+			url: '/unclaim',
+			data: {
+				event_item_id: button.attr('data-event-item-id')
+			}
+		})
+		.done(function(RD) {
+			console.log("success");
+
+				
+			var item = renderTemplate('#unclaimed-item', { 
+				event_item_id: button.attr('data-event-item-id'),
+				name: button.parent().find('h4').text()
+			});
+		
+			appendItem($('.unclaimed-items .items'), item);			
+
+			removeItem($('.my-items .items'), button.parent());
+
+		})
+		.fail(function() {
+			console.log("error");
+		})
+
+	});
+
+
+
+	// claim items and redraw self items on return.
+	$('.unclaimed-items').on('click', '.claim', function(event) {
+		event.preventDefault();
+		
+		var button = $(this);
+
+
+		$.ajax({
+			url: '/claim',
+			data: {
+				event_item_id: button.attr('data-event-item-id')
+			}
+		})
+		.done(function(RD) {
+			console.log("success");
+
+			var item = renderTemplate('#my-item', { 
+				event_item_id: button.attr('data-event-item-id'),
+				name: button.parent().find('h4').text()
+			});
+			
+			appendItem($('.my-items .items'), item);
+
+			removeItem($('.unclaimed-items .items'), button.parent());
+				
+		})
+		.fail(function() {
+			console.log("error");
+		})
+
+	});
+
+	// add new items to group list.
+	$('.new-item').on('click', 'button', function(event) {
+		event.preventDefault();
+		
+		var name = $('.add-item').val();
+		if (name) {
+
+			console.log(name);
+
+			$.ajax({
+				url: '/add_item',
+				data: {
+					'name': name,
+					event_id: app.settings.event_id
+				}
+			})
+			.done(function(RD) {
+				console.log("success");
+
+				var item = renderTemplate('#unclaimed-item', { 
+					event_item_id: RD.event_item_id,
+					name: name
+				});
+
+				$('.add-item').val('');
+
+				appendItem($('.unclaimed-items .items'), item);
+
+
+			})
+			.fail(function() {
+				console.log("error");
+			})
+		};
+
+
+	});
+
+		// remove item from group unclaimed list
+	$('.unclaimed-items').on('click', '.group-remove', function(event) {
+		event.preventDefault();
+
+		var button = $(this);
+		
+		$.ajax({
+			url: '/remove_item',
+			data: {
+				event_item_id: button.attr('data-event-item-id')
+			}
+		})
+		.done(function(RD) {
+			console.log("success");
+
+			removeItem($('.unclaimed-items .items'), button.parent());
+
+		})
+		.fail(function() {
+			console.log("error");
+		})
+		
 	});
 
 

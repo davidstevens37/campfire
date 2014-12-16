@@ -13,7 +13,7 @@ Class EventDetailsViewFrag extends ViewFrag {
 				<h5>{{theme_name}}</h5>
 				<h4>{{date_time}}</h4>
 			</div>
-			<button value="{{event_id}}">Packing List</button><br>
+			<button class="packing-list">Packing List</button><br>
 			<a href="https://www.google.com/maps/dir/' . $_SESSION['zipcode'] . '/{{lattitude}}, {{longitude}}"><button>Directions</button></a>
 		</div> 
 	';

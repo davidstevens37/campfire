@@ -1,13 +1,34 @@
+<?php 
+/**
+ *  Header Template
+ */
+//  If user is logged in, get notifications
+$event_alerts = ($user_id = Access::check()) ? AlertHelper::get_notifications() : null ; ?>
+
 <header class="main-header">
 
 	<div class="container">
 		<a href="/" class="logo" title="">Camp<span>fire</span> <img src="/images/fire.png" alt=""></a>
-<?php if ($user_id = Access::check()): ?>
+<?php if ($user_id): ?>
 		<div class="icons">
-			<i class="fa fa-calendar-o"></i>
-			<i class="fa fa-envelope-o"></i>
-			<i class="fa fa-bell-o"></i>
 			<div class="profile-picture" style='background-image: url("/images/<?php echo $_SESSION['picture_id'] ?>.jpg")'></div>
+			<div>
+				<i class="fa fa-bell-o notification-indicator"></i>
+				<div class="notifications">
+					<header>
+						<h2>Event Invitations</h2>
+					</header>
+					<div class="events">
+						<?php echo $event_alerts; ?>
+					</div>
+				</div>
+			</div>
+			<div>
+				<i class="fa fa-envelope-o"></i>
+			</div>
+			<div>
+				<i class="fa fa-calendar-o"></i>
+			</div>
 		</div>
 <?php endif ?>
 	</div>

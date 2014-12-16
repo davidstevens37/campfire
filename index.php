@@ -53,6 +53,8 @@ Router::add('/logout', '/app/controllers/users/logout.php');
 
 
 
+
+
   	
 /****************************************
 *    Items       
@@ -60,6 +62,21 @@ Router::add('/logout', '/app/controllers/users/logout.php');
 	
 // View Event Items
 Router::add('/items', '/app/controllers/items/items.php');
+
+// Claim item
+Router::add('/claim', '/app/controllers/items/claim_item.php');
+
+// Unclaim item
+Router::add('/unclaim', '/app/controllers/items/unclaim_item.php');
+
+// Add item
+Router::add('/add_item', '/app/controllers/items/add_item.php');
+
+// Remove item
+Router::add('/remove_item', '/app/controllers/items/remove_item.php');
+
+// Get My Items
+Router::add('/get_self_claimed_items', '/app/controllers/items/get_self_claimed_items.php');
 
 
 
