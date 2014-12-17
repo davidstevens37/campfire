@@ -3,6 +3,9 @@
  */
 $(function() {
 
+/**
+ *  GOOGLE MAP
+ */
 	// state and pin locations
 	var defaultPos = {
 		lat: 33.72433966174758, 
@@ -21,13 +24,9 @@ $(function() {
 		lngInput.attr('value', pinLocation.lng);
 	}
 
-
-
-
-//maps
+	// GOOGLE MAPS INIT
 	function initialize() {
 
-		// MAP OPTIONS
 		var mapOptions = {
 			center: defaultPos,
 			zoom: 4,
@@ -36,7 +35,6 @@ $(function() {
 
 	// BINDS MAP TO DOM
 	var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-
 
 	var image = {
 		url: 'images/fire_map_icon.png',
@@ -77,36 +75,57 @@ $(function() {
 		//EVENT LISTENERS TO MANAGE ADDING MARKER AND MOVING MARKER
 		google.maps.event.addListener(map, 'click', addMarker);
 		google.maps.event.addListener(marker, 'dragend', dragMarker);
-
 	}
 
 	// GOOGLE MAP INIT
     google.maps.event.addDomListener(window, 'load', initialize);
+// --- end google maps --- 
+
+	//ajax defaults:
+	$.ajaxSetup({
+		type: 'POST',
+		dataType: 'json',
+		cache: false
+	});
+
+    var renderTemplate = function(templateId, object) {
+    	var source = $(templateId).html();
+    	var template = Handlebars.compile(source);
+    	var output = template(object);
+    	return output;
+    }
+
+	//form to object:
+	var formToObject = function(form) {
+        var formData = {};
+        $.each(form.serializeArray(), function() {
+        	if (this.value) {
+           		formData[this.name] = this.value;
+        	};
+        });
+        return formData;
+    }
+
+	// NOTIFICATIONS STATE MANAGER
+    $('.notification-indicator').click(function(event) {
+    	$('.notifications').toggleClass('active');
+    	console.log('click');
+    });
+
+    // LINK TO PACKING LIST
+    $('.packing-list').click(function(event) {
+    	location.href = '/items?event_id=' + app.settings.event_id;
+    });
+
+    // link to invite
+    $('.invite').click(function(event) {
+    	location.href = '/invite?event_id=' + app.settings.event_id;
+    });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/*************************
+ * EDIT BULLIETEN BOARD
+ *************************/
     // function to select all text in an element.
 	jQuery.fn.selectText = function(){
 	    var doc = document;
@@ -125,23 +144,22 @@ $(function() {
 	    }
 	};
 
-
     // edit bulletin board on focus
 	$('.bulletin p').on('focus', function(event) {
 		
 		var bulletin = $(this)
     	var defaultText = 'Click here to edit the description.';
 
-    	console.log(bulletin.text())
     	if ($.trim($(this).text()) == defaultText) {
     		bulletin.selectText();
     	};
-    	
     });
 
-    // on bulletin blur, ajax to update the bulletin board.
+ /**
+ *  UPDATE BULLITEN BOARD VIA AJAX
+ */
     $('.bulletin p').on('blur', function(event) {
-    	console.log('blur');
+
     	var description = $(this).text();
     	var eventId = $(this).attr('data-event-id');
 
@@ -160,66 +178,13 @@ $(function() {
     	.fail(function() {
     		console.log("error");
     	})
-    	
-
     });
 
 
-
-
-    $('.notification-indicator').click(function(event) {
-    	$('.notifications').toggleClass('active');
-    	console.log('click');
-    });
-
-
-
-
-
-    $('.packing-list').click(function(event) {
-    	location.href = '/items?event_id=' + app.settings.event_id;
-    });
-
-
-
-
-
-
-
-
-
-
-
-
-    var renderTemplate = function(templateId, object) {
-    	var source = $(templateId).html();
-    	var template = Handlebars.compile(source);
-    	var output = template(object);
-    	return output;
-
-    }
-
-
-	//form to object:
-	var formToObject = function(form) {
-        var formData = {};
-        $.each(form.serializeArray(), function() {
-        	if (this.value) {
-           		formData[this.name] = this.value;
-        	};
-        });
-        return formData;
-    }
-
-	//ajax defaults:
-	$.ajaxSetup({
-		type: 'POST',
-		dataType: 'json',
-		cache: false
-	});
-
-	
-	// create user submission 
+/**********************
+ *  USERS
+ ***********************/
+	// create new user
 	$('.create-account form.new-user').on('submit', function(e){
 		e.preventDefault();
 		
@@ -236,11 +201,10 @@ $(function() {
 		})
 		.fail(function() {
 			console.log("error");
-		})
-		
-	})
+		});
+	});
 
-	// login
+	//  user login
 	$('.create-account form.login').on('submit', function(e){
 		e.preventDefault();
 		
@@ -261,11 +225,13 @@ $(function() {
 		})
 		.fail(function() {
 			console.log("error");
-		})
-		
-	})
+		});
+	});
 
 
+/******************
+ *  COMMENTS
+ *******************/
 	// New comment AJAX
 	$('div.new-comment').on('click', 'button', function(){
 
@@ -274,9 +240,7 @@ $(function() {
 		var commentData = {
 				'comment': comment.val(),
 				'event_id': comment.attr('data-event-id')
-			}
-
-			console.log(commentData);
+			};
 
 		$.ajax({
 			url: '/add_comment',
@@ -291,9 +255,9 @@ $(function() {
 		})
 		.fail(function() {
 			console.log("error");
-		})
+		});
 		
-	})
+	});
 
 	// delete comment
 	$('.comment-action').on('click', 'button', function(event) {
@@ -309,44 +273,127 @@ $(function() {
 			}
 		})
 		.done(function(RD) {
-
-			console.log("success");
-
 			if (!RD.error) {
 				button.parents('.comment').remove();
 			};
-			
+		})
+		.fail(function() {
+			console.log("error");
+		});
+
+	});
+
+
+/****************************
+ *  USER_EVENT
+ ****************************/
+ 	// Invite useres
+ 	$('.invite-users').on('click', '.user-not-invited', function(event) {
+ 		
+ 		var user = $(this);
+
+ 		var userData = {
+ 			'class': 'member',
+ 			user_id: user.attr('data-user-id'),
+ 			picture: user.find('div:first-child').attr('style'),
+ 			name: user.find('h3').text(),
+ 			status: 'invited'
+ 		}
+
+		$.ajax({
+			url: '/process_invite',
+			data: { 
+				user_id: user.attr('data-user-id'),
+				event_id: app.settings.event_id,
+			}
+		})
+		.done(function(RD) {
+			console.log('success');
+			if (!RD.error) {
+
+				var invitedUser = renderTemplate('#user', userData);
+
+				$('.group').append(invitedUser);
+
+				user.remove();
+			};
+		})
+		.fail(function() {
+			console.log("error");
+		});
+
+	});
+
+	// remove useres
+ 	$('.remove-users').on('click', '.member', function(event) {
+ 		
+ 		var user = $(this);
+
+ 		var userData = {
+ 			'class': 'user-not-invited',
+ 			user_id: user.attr('data-user-id'),
+ 			picture: user.find('div:first-child').attr('style'),
+ 			name: user.find('h3').text(),
+ 			status: 'not invited'
+ 		}
+
+		$.ajax({
+			url: '/remove_member',
+			data: { 
+				user_id: user.attr('data-user-id'),
+				event_id: app.settings.event_id,
+			}
+		})
+		.done(function(RD) {
+			console.log('success');
+			if (!RD.error) {
+				
+				var invitedUser = renderTemplate('#user', userData);
+
+				$('.invite-users').append(invitedUser);
+
+				user.remove();
+			};
+		})
+		.fail(function() {
+			console.log("error");
+		});
+
+	});
+ 
+	// accepting/declining an event
+	$('.notifications').on('click', 'button', function(event) {
+
+		var button = $(this);
+
+		$.ajax({
+			url: '/action_invitation',
+			data: {
+				event_id: button.attr('data-event-id'),
+				member_status_id: button.attr('data-member-status-id'),
+			}
+		})
+		.done(function() {
+			removeItem( $('.notifications .events'), button.parents('.event-alert') );
 		})
 		.fail(function() {
 			console.log("error");
 		})
+		
 
 	});
 
 
-
-
-
-
-
-
-
-
-
-
-	// changes event picture when option is selected
+/****************************
+ *  EVENTS RELATED
+ ****************************/
+ 	// changes event picture when option is selected
 	$('select').on('change', function(event) {
-
 		var selectField = $(this);
 		var optionNumber = parseInt(selectField.val()) + 1;
-		var themePicture = selectField.find('option:nth-child(' + optionNumber + ')' ).attr('data-picture');;
-		console.log(themePicture);
-
-
+		var themePicture = selectField.find('option:nth-child(' + optionNumber + ')' ).attr('data-picture');
 		$('.event-picture').attr('style', "background-image: url('" + themePicture + "');");
 	});
-
-
 
 	// ajax for create event
 	$('.create-event').on('submit', 'form', function(event) {
@@ -359,68 +406,17 @@ $(function() {
 			data: formToObject(form)
 		})
 		.done(function(RD) {
-
-			console.log("success");
-			// location.href = '/event?event_id=' + RD.event.event_id;
+			location.href = '/event?event_id=' + RD.event.event_id;
 		})
 		.fail(function() {
 			console.log("error");
-		})
-
+		});
 	});
 
 
-
-
-
-
-
-	// accepting/declining an event
-	$('.notifications').on('click', 'button', function(event) {
-
-		var button = $(this);
-
-		$.ajax({
-			url: '/action_invitation',
-			data: {
-				event_id: button.attr('data-event-id'),
-				member_status_id: button.attr('data-member-status-id'),
-			},
-		})
-		.done(function() {
-			console.log("success");
-
-			removeItem( $('.notifications .events'), button.parents('.event-alert') );
-
-
-
-		})
-		.fail(function() {
-			console.log("error");
-		})
-		
-
-	});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/****************************
+ *  ITEMS
+ ****************************/
 
 	var	appendItem = function(elem, item) {
 		if (elem.find('.no-items').length) {
@@ -452,8 +448,6 @@ $(function() {
 			}
 		})
 		.done(function(RD) {
-			console.log("success");
-
 				
 			var item = renderTemplate('#unclaimed-item', { 
 				event_item_id: button.attr('data-event-item-id'),
@@ -463,15 +457,11 @@ $(function() {
 			appendItem($('.unclaimed-items .items'), item);			
 
 			removeItem($('.my-items .items'), button.parent());
-
 		})
 		.fail(function() {
 			console.log("error");
 		})
-
 	});
-
-
 
 	// claim items and redraw self items on return.
 	$('.unclaimed-items').on('click', '.claim', function(event) {
@@ -497,7 +487,6 @@ $(function() {
 			appendItem($('.my-items .items'), item);
 
 			removeItem($('.unclaimed-items .items'), button.parent());
-				
 		})
 		.fail(function() {
 			console.log("error");
@@ -512,8 +501,6 @@ $(function() {
 		var name = $('.add-item').val();
 		if (name) {
 
-			console.log(name);
-
 			$.ajax({
 				url: '/add_item',
 				data: {
@@ -522,28 +509,21 @@ $(function() {
 				}
 			})
 			.done(function(RD) {
-				console.log("success");
 
 				var item = renderTemplate('#unclaimed-item', { 
 					event_item_id: RD.event_item_id,
 					name: name
 				});
-
 				$('.add-item').val('');
-
 				appendItem($('.unclaimed-items .items'), item);
-
-
 			})
 			.fail(function() {
 				console.log("error");
 			})
 		};
-
-
 	});
 
-		// remove item from group unclaimed list
+	// remove item from group unclaimed list
 	$('.unclaimed-items').on('click', '.group-remove', function(event) {
 		event.preventDefault();
 
@@ -559,14 +539,9 @@ $(function() {
 			console.log("success");
 
 			removeItem($('.unclaimed-items .items'), button.parent());
-
 		})
 		.fail(function() {
 			console.log("error");
-		})
-		
+		})	
 	});
-
-
-
 });

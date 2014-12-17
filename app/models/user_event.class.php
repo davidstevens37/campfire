@@ -24,7 +24,7 @@ Class UserEvent extends Model {
 	}
 
 
-
+	// sets host access when creating an event
 	public static function host_event($event_id) {
 
 
@@ -39,6 +39,22 @@ Class UserEvent extends Model {
 
 		return db::insert('user_event', $sql_values) ? $sql_values : null; 
 
+	}
+
+
+	public static function remove($input) {
+
+		$sql_values = [
+			'event_id' => $input['event_id'],
+			'user_id' => $input['user_id'],
+		];
+
+		// Ensure values are encompassed with quote marks
+		$sql_values = db::auto_quote($sql_values);
+
+		$sql = "DELETE FROM `user_event` WHERE user_id = {$sql_values['user_id']} AND event_id = {$sql_values['event_id']}";
+
+		return db::execute($sql) ? $sql_values : null;
 	}
 
 

@@ -83,11 +83,21 @@ class User extends Model {
 
 	}
 
-	public static function get_all_users() {
+	public static function get_all_users($event_id) {
+
+		if (!is_numeric($event_id)) {
+			return null;
+		}
 
 		$sql = 
-			'SELECT * FROM `user`'
-			;
+			"	SELECT *
+				FROM (SELECT * FROM `user_event` WHERE event_id = $event_id) uevent
+				RIGHT join `user` using (user_id)
+				LEFT join `picture`USING (picture_id)
+				LEFT JOIN `member_status` USING (member_status_id)
+				WHERE member_status_id <> 1
+				or member_status_id is null
+			";
 
 		$results = db::execute($sql);
 

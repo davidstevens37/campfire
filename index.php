@@ -60,8 +60,6 @@ Router::add('/auth_login', '/app/controllers/users/auth_login.php');
 Router::add('/logout', '/app/controllers/users/logout.php');
 
 
-
-  	
 /****************************************
 *    User_Event       
 *****************************************/
@@ -69,11 +67,16 @@ Router::add('/logout', '/app/controllers/users/logout.php');
 // Action Invitaions
 Router::add('/action_invitation', '/app/controllers/user_event/action_invitation.php');
 
+// Invite
+Router::add('/invite', '/app/controllers/user_event/invite.php');
+
+// Process Invite
+Router::add('/process_invite', '/app/controllers/user_event/process_invite.php');
+
+// Process Invite
+Router::add('/remove_member', '/app/controllers/user_event/remove_member.php');
 
 
-
-
-  	
 /****************************************
 *    Items       
 *****************************************/

@@ -307,6 +307,13 @@ button {
 	color: orange;
 }
 
+
+
+
+
+
+
+
 .logo {
 	position: absolute;
 	top: 15px;
@@ -356,6 +363,11 @@ button {
 		margin: 30px auto;
 	}
 
+	button {
+		display: inline-block;
+		margin: 5px;
+	}
+
 }
 
 // event info sections
@@ -379,15 +391,44 @@ button {
 
 
 
-.invite {
-	border: 1px solid #DEDEDE;
-	position: absolute;
-	top: 355px;
-	left: 30px;
-	width: 195px;
-	min-height: 30px;
+
+.member, .user-not-invited {
+	overflow: hidden;
+	margin-top: 15px;
+	display: inline-block;
+
+	> :first-child {
+		height: 50px;
+		width: 50px;
+		border-radius: 50%;
+		background-size: cover;
+		float: left;
+	}
+	> :last-child {
+		margin-left: 60px;
+		padding-top: 5px;
+		text-transform: capitalize;
+		:last-child {
+			font-family: 'Open Sans', sans-serif;
+
+			font-size: 8pt;
+			color: orange;
+			margin-top: -3px
+
+		}
+	}
 }
 
+.user-not-invited {
+	width: 49%;
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.remove-users .member:hover {
+	cursor: pointer;
+}
 
 
 
@@ -399,33 +440,6 @@ button {
 	float: right;
 	@include size-bg(transparant,"",225px);
 	min-height: 150px;
-	// margin-right: 15px;
-
-	.member {
-		overflow: hidden;
-		margin-top: 15px;
-
-		> :first-child {
-			height: 50px;
-			width: 50px;
-			border-radius: 50%;
-			background-size: cover;
-			float: left;
-		}
-		> :last-child {
-			margin-left: 60px;
-			padding-top: 5px;
-			text-transform: capitalize;
-			:last-child {
-				font-family: 'Open Sans', sans-serif;
-
-				font-size: 8pt;
-				color: orange;
-				margin-top: -3px
-
-			}
-		}
-	}
 }
 
 img {

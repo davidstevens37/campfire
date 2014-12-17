@@ -252,6 +252,9 @@ button {
     border-radius: 50%;
     background-size: cover;
     margin: 30px auto; }
+  .event-details button, .user button {
+    display: inline-block;
+    margin: 5px; }
 
 .info h2, .info h4, .info h5 {
   font-weight: lighter;
@@ -263,13 +266,33 @@ button {
   color: #808080;
   margin-bottom: 15px; }
 
-.invite {
-  border: 1px solid #DEDEDE;
-  position: absolute;
-  top: 355px;
-  left: 30px;
-  width: 195px;
-  min-height: 30px; }
+.member, .user-not-invited {
+  overflow: hidden;
+  margin-top: 15px;
+  display: inline-block; }
+  .member > :first-child, .user-not-invited > :first-child {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background-size: cover;
+    float: left; }
+  .member > :last-child, .user-not-invited > :last-child {
+    margin-left: 60px;
+    padding-top: 5px;
+    text-transform: capitalize; }
+    .member > :last-child :last-child, .user-not-invited > :last-child :last-child {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 8pt;
+      color: orange;
+      margin-top: -3px; }
+
+.user-not-invited {
+  width: 49%; }
+  .user-not-invited:hover {
+    cursor: pointer; }
+
+.remove-users .member:hover {
+  cursor: pointer; }
 
 .group {
   float: right;
@@ -277,24 +300,6 @@ button {
   height: "";
   width: 225px;
   min-height: 150px; }
-  .group .member {
-    overflow: hidden;
-    margin-top: 15px; }
-    .group .member > :first-child {
-      height: 50px;
-      width: 50px;
-      border-radius: 50%;
-      background-size: cover;
-      float: left; }
-    .group .member > :last-child {
-      margin-left: 60px;
-      padding-top: 5px;
-      text-transform: capitalize; }
-      .group .member > :last-child :last-child {
-        font-family: 'Open Sans', sans-serif;
-        font-size: 8pt;
-        color: orange;
-        margin-top: -3px; }
 
 img {
   height: 35px; }

@@ -9,8 +9,6 @@ Class Controller extends AppController {
 
 		$event_id = $_GET['event_id'];
 
-
-
 		// if event_id is not numeric, display error message else display event.
 		if (!is_numeric($event_id)) {
 			$this->view->view_event_error = '<div><p>OOPS, LOOKS LIKE THAT IT NOT A VALID EVENT</p><div>';
@@ -24,26 +22,29 @@ Class Controller extends AppController {
 			/**
 			 *	Event Details
 			 */
-
 			// if Get event successful
 			if ($event_results = Event::get_event($event_id)) {
 
-				// Generate/render event details
-				$this->view->event_details = EventDetailsViewFrag::build($event_results);
+				if ($event_results['host_user_id'] == $user_id) {
+					$this->view->edditable = 'contenteditable';
+
+					$this->view->event_details = HostEventDetailsViewFrag::build($event_results);
+					
+				} else {
+
+					// Generate/render event details
+					$this->view->event_details = EventDetailsViewFrag::build($event_results);
+				}
 
 				// Set event description . if null, set default
 				$this->view->event_description = $event_results['description'] ? : 'Click here to edit the description.';
 
-				if ($event_results['host_user_id'] == Access::check()) {
-					$this->view->edditable = 'contenteditable';
-				}
 			}
 
 
 			/**
 			 *	Comments
 			 */
-			
 			// Get comments from event_id
 			$comment_results = Comment::get_comments($event_id);
 
@@ -64,7 +65,6 @@ Class Controller extends AppController {
 			/**
 			 *	group members
 			 */
-
 			// Get event members
 			$user_event_results = UserEvent::get_members($event_id);
 
@@ -75,19 +75,6 @@ Class Controller extends AppController {
 					$this->view->members .= MemberViewFrag::build($row);
 				}
 
-			}
-
-			/**
-			 *  Users
-			 */
-			// get all users
-			$user_results = User::get_all_users();
-
-			if ($user_results->num_rows) {
-				
-				while ($row = $user_results->fetch_assoc()) {
-					$this->view->users .= UserViewFrag::build($row);
-				}
 			}
 		}
 	}
@@ -100,21 +87,11 @@ extract($controller->view->vars);
 
 
 <?php if ($view_event_error): ?>
-
 	<?php echo $view_event_error ?>
-	
-
 <?php else: ?>
 
 	<!-- Event Details / Quick Look -->
-
 	<?php echo $event_details; ?>
-
-		<input class="invite" list="users" type="text">
-		<datalist id="users">
-			<?php echo $users ?>
-		</datalist>
-
 
 	<!-- Group Members - Invitees // Attendees // Host -->
 	<div class="group">
@@ -129,7 +106,7 @@ extract($controller->view->vars);
 				<h2>Bulletin Board</h2>
 			</header>
 			<p data-event-id="<?php echo $event_id; ?>" <?= $edditable ?>>
-				<?php echo $event_description ?>
+				<?php echo htmlentities($event_description); ?>
 			</p>
 		</div>
 		<div class="new-comment">
@@ -143,6 +120,5 @@ extract($controller->view->vars);
 		</div>
 		<?php echo $comments; ?>
 	</main><!-- /main.board -->
-
 
 <?php endif ?>

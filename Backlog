@@ -5,9 +5,10 @@ primary:
 
  	INVITE USERS!
 
+	edit comments
+
 	_ delete comments
 
-	edit comments
 
 	_ accept and decline invitations
 
@@ -31,6 +32,10 @@ Extras:
 
 	 _ integrate maps
 
+	_ outline 
+
+	_ notify users of actions and errors
+
 	integrate text notifications
 
 	payment services
@@ -43,13 +48,17 @@ Extras:
 
 	prevent access to events not invited to
 
------
-	_ outline 
-
-	_ notify users of actions and errors
-
 	expand input, remove border, add placholder 
 
+	friends
+
+	in app messaging
+
+	calander view
 
 
-INSERT INTO event_item (name, event_id) select item_name, {$event_id} FROM theme_item LEFT JOIN item USING (item_id) WHERE theme_id = {theme_id}
+--
+
+text area resize. none
+	text size bigger
+
