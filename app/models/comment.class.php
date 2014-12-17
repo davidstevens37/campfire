@@ -41,6 +41,23 @@ Class Comment extends Model {
 		return $results;
 	}
 
+	public static function delete($comment_id, $user_id) {
+
+		if (!is_numeric($comment_id) || !is_numeric($user_id)) {
+			return null;
+		}
+
+		$sql = 'DELETE FROM `comment` WHERE comment_id = ' . $comment_id . ' AND user_id = ' . $user_id;
+		
+		$results = db::execute($sql);
+
+
+		return $results;
+
+
+
+	}
+
 	public function get_comment(){
 		return $this->comment;
 	}

@@ -12,6 +12,13 @@ Class Controller extends AjaxController {
 
 				$event_object = new Event($data);
 
+				
+
+				$event_items = EventItem::stock_items($event_object->event_id, $event_object->theme_id);
+
+				// print_r($event_items);
+
+
 				if ($result = UserEvent::host_event($event_object->event_id)) {
 					$this->view['userEvent'] = $result;
 				} else {

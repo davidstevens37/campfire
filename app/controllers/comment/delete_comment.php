@@ -3,16 +3,18 @@ Class Controller extends AjaxController {
 	
 	public function init() {
 	
-		if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['user_id'] = Access::check()) {
+		if ($_SERVER['REQUEST_METHOD'] == 'POST' && $user_id = Access::check()) {
 
 			$data = Validator::validate($_POST);
 
+
 			if (!$data['error']) {
 
-				
+
+				$this->view['test'] = Comment::delete($data['comment_id'], $user_id);
 
 			} else {
-				$this->view['error'] = 'validation error';
+				$this->view['error'] = $data;
 			}
 		}
 	}

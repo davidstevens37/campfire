@@ -1,6 +1,4 @@
 <?php 
-
-
 /**
  *	View Event Controller 
  */

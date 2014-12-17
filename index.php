@@ -26,9 +26,18 @@ Router::add('/process_event', '/app/controllers/events/process_event.php');
 // Process Event Description
 Router::add('/process_event_description', '/app/controllers/events/process_event_description.php');
 
+
+
+  	
+/****************************************
+*    Comments     
+*****************************************/
+	
 // Add Comment
 Router::add('/add_comment', '/app/controllers/comment/add_comment.php');
 
+// Delete Comment
+Router::add('/delete_comment', '/app/controllers/comment/delete_comment.php');
   	
   	
 /****************************************

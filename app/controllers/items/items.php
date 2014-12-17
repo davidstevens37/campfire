@@ -82,7 +82,7 @@ extract($controller->view->vars);
 				<h2>Add items to the list</h2>
 			</header>
 			<div>
-				<textarea class="add-item" data-event-id="<?php echo $event_id; ?>"></textarea>
+				<textarea class="add-item" placeholder="add an item here..." data-event-id="<?php echo $event_id; ?>"></textarea>
 				<button>Submit</button>
 			</div>
 		</div>

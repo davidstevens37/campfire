@@ -295,6 +295,44 @@ $(function() {
 		
 	})
 
+	// delete comment
+	$('.comment-action').on('click', 'button', function(event) {
+		
+		var button = $(this);
+
+		$.ajax({
+			url: '/delete_comment',
+			data: { 
+				comment_id: button.attr('data-comment-id'),
+				event_id: app.settings.event_id,
+				user_id: app.settings.user_id
+			}
+		})
+		.done(function(RD) {
+
+			console.log("success");
+
+			if (!RD.error) {
+				button.parents('.comment').remove();
+			};
+			
+		})
+		.fail(function() {
+			console.log("error");
+		})
+
+	});
+
+
+
+
+
+
+
+
+
+
+
 
 	// changes event picture when option is selected
 	$('select').on('change', function(event) {
@@ -323,7 +361,7 @@ $(function() {
 		.done(function(RD) {
 
 			console.log("success");
-			location.href = '/event?event_id=' + RD.event.event_id;
+			// location.href = '/event?event_id=' + RD.event.event_id;
 		})
 		.fail(function() {
 			console.log("error");

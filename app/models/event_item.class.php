@@ -90,6 +90,24 @@ Class EventItem extends Model {
 		return $results;
 	}
 
+
+	public static function stock_items($event_id, $theme_id) {
+
+		// print_r('test');
+
+		if (!is_numeric($event_id) || !is_numeric($theme_id)) {
+			return null;
+		}
+
+		$sql = "INSERT INTO event_item (name, event_id) select item_name, $event_id FROM theme_item LEFT JOIN item USING (item_id) WHERE theme_id = $theme_id";
+		// print_r($sql);
+
+		$results = db::execute($sql);
+
+		return $results;
+
+	}
+
 }
 
 ?>

@@ -8,12 +8,13 @@ Class Validator {
 		'username' => '/^[a-zA-Z0-9]{3,12}$/',
 		'password' => '/^[a-zA-Z0-9]{3,20}$/',
 		'email' => '/\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/i',
-		'user_id' => '/[0-9]{1,9}/',
-		'event_id' => '/[0-9]{1,9}/',
-		'phone' => '/[0-9]{1,9}/',
+		'user_id' => '/^\d+$/',
+		'event_id' => '/^\d+$/',
+		'phone' => '/^\d+$/',
 		'zipcode' => '/[0-9]{5}/',
 		'age' => '/[0-9]{1,3}/',
-		'comment' => '/./'
+		'comment' => '/./',
+		'comment_id' => '/^\d+$/'
 	];
 
 

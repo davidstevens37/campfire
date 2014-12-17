@@ -43,7 +43,9 @@ $alert = AlertHelper::$notifications ? 'alert' : null;
 		<!-- <a href="/">Home</a> -->
 		<a href="/events">My Events</a>
 		<a href="/create_event">Create Event</a>
-		<a href="">link</a>
+		<a href="">Calender</a>
+		<a href="">Popular Spots</a>
+		<a href="">Gear</a>
 <?php if ($user_id): ?>
 		<a href="/logout">Logout</a>
 <?php else: ?>

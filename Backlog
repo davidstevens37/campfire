@@ -5,34 +5,26 @@ primary:
 
  	INVITE USERS!
 
-	edit delete comments
+	_ delete comments
 
-	prevent access to events not invited to
+	edit comments
 
 	_ accept and decline invitations
 
 	_ RED DOT INDICATOR FOR NOTIFICATIONS
 	
-
-
-	
-
 	_ create endpoint for create event
 	
 	_ create item list controller
-
 
 	_ add create event controller
 
 	_ comment functionality
 
-
 	_ 'https://www.google.com/maps/dir//25.068702, -112.064597'
 
-
-secondary:
-
 	_ make expired events catagory
+
 
 
 Extras:
@@ -47,15 +39,17 @@ Extras:
 
 	weather services
 
+	Host more privlidges
 
+	prevent access to events not invited to
 
 -----
-_ outline 
+	_ outline 
 
-_ notify users of actions and errors
+	_ notify users of actions and errors
 
-video
+	expand input, remove border, add placholder 
 
-highlight section color
 
-expand input, remove border, add placholder 
+
+INSERT INTO event_item (name, event_id) select item_name, {$event_id} FROM theme_item LEFT JOIN item USING (item_id) WHERE theme_id = {theme_id}

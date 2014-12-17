@@ -7,7 +7,7 @@ Class SelfCommentViewFrag extends ViewFrag {
 			<div style="background-image: url(\'{{picture}}\');"></div> 
 			<div class="comment-action">
 				<span>{{datetime_added}}</span>
-				<button>delete</button>
+				<button data-comment-id="{{comment_id}}">remove</button>
 			</div>
 			<h2>{{first_name}}</h2>
 		</header>
