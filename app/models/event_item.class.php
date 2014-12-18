@@ -108,6 +108,32 @@ Class EventItem extends Model {
 
 	}
 
+	public static function unclaim_all($event_id, $user_id) {
+
+		// ensures event item id is numeric
+		if (!is_numeric($event_id)) {
+			return null;
+		}
+
+		//  ensures claimed by is numeric if given
+		if (!is_numeric($user_id)) {
+			return null;
+		}
+
+		$sql_values = ['claimed_by' => null];
+
+		$sql_where = ' WHERE event_id = ' . $event_id . ' AND claimed_by = ' . $user_id;
+
+		// Ensure values are encompassed with quote marks
+		$sql_values = db::auto_quote($sql_values);
+
+		return db::update('event_item', $sql_values, $sql_where);
+
+	}
+
+
+
+
 }
 
 ?>

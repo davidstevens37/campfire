@@ -1,0 +1,63 @@
+feed back
+
+STORY TELL!!
+
+	FEATURE LIST
+		
+		login
+
+		create account
+
+		create event
+			map updating cooridinates
+
+		my events
+			i can see how many events im participating in
+			i can see when the next upcoming event is.
+			click on event to take you to the event page
+
+		event page
+			add / edit description
+			add comment
+			delete comment
+			directions
+
+		invite page (host only)
+			invite users
+			remove users
+
+		packing list
+			claim
+			unclaim
+			add 
+			remove
+			view others claming
+
+		notifications
+			accept 
+			decline
+
+		
+__________________________________________________________		
+
+ultimate goal
+
+dont engage too soon
+
+clean up data
+
+add data
+
+preload scenario
+
+tightup story
+
+highlight intricate features (maps)
+
+use date 
+
+explain theme connectoin to items
+
+create event > my events > event page
+
+future features.

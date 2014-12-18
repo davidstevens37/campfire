@@ -28,6 +28,7 @@ $alert = AlertHelper::$notifications ? 'alert' : null;
 						<?php echo $event_alerts; ?>
 					</div>
 				</div>
+				<div class="backdrop"></div>
 			</div>
 			<div>
 				<i class="fa fa-envelope-o"></i>

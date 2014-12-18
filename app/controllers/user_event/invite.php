@@ -38,14 +38,19 @@ Class Controller extends AppController {
 
 				while ($row = $user_results->fetch_assoc()) {
 
-					if (!$row['status']) {
-						$row['status'] = 'not invited';
+					if ($row['status']) {
 
+						$row['class'] = 'invited';
+
+						$this->view->members .= MemberViewFrag::build($row);
 						$this->view->users .= UserViewFrag::build($row);
 
 					} else {
+
+						$row['class'] = 'not-invited';
+						$row['status'] = 'not invited';
+						$this->view->users .= UserViewFrag::build($row);
 						
-						$this->view->members .= MemberViewFrag::build($row);
 					}
 
 				}
@@ -71,7 +76,7 @@ extract($controller->view->vars);
 	<?php echo $event_details; ?>
 
 	<div class="group remove-users">
-		<h2>Remove Members</h2>
+		<h2>Group Members</h2>
 		<?php echo $members; ?>
 	</div>
 

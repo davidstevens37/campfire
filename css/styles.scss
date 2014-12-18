@@ -17,6 +17,8 @@
 
 textarea {
 	border: none;
+	resize: none;
+	font-size: 12pt;
 
 }
 
@@ -43,8 +45,14 @@ p, a {
 
 }
 
+.active {
+	display: block;
+}
+
 video {
 	margin-top: -15px;
+	margin-bottom: -28px;
+
 	width: 100%;
 	z-index: -100;
 }
@@ -109,6 +117,7 @@ button {
 	background-color: white;
 	border-radius: 30px;
 	width: 100px;
+	cursor: pointer;
 }
 
 .main-header {
@@ -241,7 +250,19 @@ button {
 
 
 
+.backdrop {
+	display: none;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	z-index: 1;
 
+	&.active {
+		display: block;
+	}
+}
 
 
 
@@ -329,7 +350,7 @@ button {
 
 .page {
 	@include size-bg(200px,initial,1060px);;
-	min-height: 600px;
+	min-height: 550px;
 	margin: auto;
 	position: relative;
 	&:after {
@@ -365,9 +386,12 @@ button {
 
 	button {
 		display: inline-block;
-		margin: 5px;
+		margin: 5px 10px;
 	}
+}
 
+.event-details div {
+	cursor: pointer;
 }
 
 // event info sections
@@ -396,6 +420,8 @@ button {
 	overflow: hidden;
 	margin-top: 15px;
 	display: inline-block;
+	padding: 5px;
+	border: 1px solid transparent;
 
 	> :first-child {
 		height: 50px;
@@ -419,16 +445,43 @@ button {
 	}
 }
 
-.user-not-invited {
+.invite-users .member {
 	width: 49%;
 	&:hover {
 		cursor: pointer;
+
+
 	}
 }
 
-.remove-users .member:hover {
-	cursor: pointer;
+.invited {
+	position: relative;
+	background-color: rgba(183, 240, 183, 0.37); 
+	border-radius: 10px;
+	border: 1px solid #72CF72;
+
+	&:before {
+		color: #72CF72;
+		display: inline-block;
+		position: absolute;
+		right: 10px;
+		top: 50%;
+		content: "\f058";
+		font-family: FontAwesome;
+		font-size: 2em;
+		transform: translateY(-50%);
+	}
 }
+ 
+.invited:hover {
+	border-color: rgb(229, 86, 86);
+	background-color: rgba(255, 155, 155, 0.48);
+	&:before {
+		color: rgb(229, 86, 86);
+		content: "\f00d";
+	}
+}
+
 
 
 
@@ -579,7 +632,7 @@ img {
 footer {
 	padding: 10px;
 	background-color: white;
-	height: 200px;
+	height: 250px;
 	margin-top: 25px;
 
 	text-align: center;

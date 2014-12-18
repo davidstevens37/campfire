@@ -108,10 +108,15 @@ $(function() {
 
 	// NOTIFICATIONS STATE MANAGER
     $('.notification-indicator').click(function(event) {
-    	$('.notifications').toggleClass('active');
-    	console.log('click');
+    	$('.notifications').addClass('active');
+    	$('.backdrop').addClass('active');
     });
 
+    $('.backdrop').click(function(event) {
+    	$('.notifications').removeClass('active');
+    	$('.backdrop').removeClass('active');
+    	location.reload();
+    });
     // LINK TO PACKING LIST
     $('.packing-list').click(function(event) {
     	location.href = '/items?event_id=' + app.settings.event_id;
@@ -120,6 +125,10 @@ $(function() {
     // link to invite
     $('.invite').click(function(event) {
     	location.href = '/invite?event_id=' + app.settings.event_id;
+    });
+
+    $('.event-details div').click(function(event) {
+    	location.href = '/event?event_id=' + app.settings.event_id;
     });
 
 
@@ -288,7 +297,7 @@ $(function() {
  *  USER_EVENT
  ****************************/
  	// Invite useres
- 	$('.invite-users').on('click', '.user-not-invited', function(event) {
+ 	$('.invite-users').on('click', '.not-invited', function(event) {
  		
  		var user = $(this);
 
@@ -311,11 +320,17 @@ $(function() {
 			console.log('success');
 			if (!RD.error) {
 
+				user.removeClass('not-invited').addClass('invited');
+
 				var invitedUser = renderTemplate('#user', userData);
 
 				$('.group').append(invitedUser);
 
-				user.remove();
+
+				user.find('h5').html('Invited');
+				// user.fadeOut(300, function () {
+				// 	user.remove();
+				// });
 			};
 		})
 		.fail(function() {
@@ -325,12 +340,12 @@ $(function() {
 	});
 
 	// remove useres
- 	$('.remove-users').on('click', '.member', function(event) {
+ 	$('.invite-users').on('click', '.invited', function(event) {
  		
  		var user = $(this);
 
  		var userData = {
- 			'class': 'user-not-invited',
+ 			'class': 'not-invited',
  			user_id: user.attr('data-user-id'),
  			picture: user.find('div:first-child').attr('style'),
  			name: user.find('h3').text(),
@@ -350,9 +365,30 @@ $(function() {
 				
 				var invitedUser = renderTemplate('#user', userData);
 
-				$('.invite-users').append(invitedUser);
+				user.removeClass('invited').addClass('not-invited');
 
-				user.remove();
+				$('.group').find('div[data-user-id="' + userData.user_id + '"]').remove();
+
+				$('.invite-users').find('div[data-user-id="' + userData.user_id + '"] h5')
+					.html('Not Invited');
+
+					console.log(userData.user_id);
+
+				//removes claimed items when a user is univited
+				$.ajax({
+					url: '/unclaim',
+					data: {
+						unclaim: 'all',
+						event_id: app.settings.event_id,
+						removed_user_id: userData.user_id
+					},
+				})
+				.done(function() {
+					console.log("success");
+				})
+				.fail(function() {
+					console.log("error");
+				})				
 			};
 		})
 		.fail(function() {

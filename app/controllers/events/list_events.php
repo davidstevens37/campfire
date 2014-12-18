@@ -30,7 +30,7 @@ Class Controller extends AppController {
 				while ($row = $user_event_results->fetch_assoc()) {
 
 					// if event is past, place it into the past events catagory
-					if ($row['date_time'] < $row['now']) {
+					if ($row['date_time'] && $row['date_time'] < $row['now']) {
 						$this->view->events_past .= EventListViewFrag::build($row);
 					} else {
 

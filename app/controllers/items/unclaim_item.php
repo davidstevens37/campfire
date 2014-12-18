@@ -10,7 +10,15 @@ Class Controller extends AjaxController {
 
 			if (!$data['error']) {
 
-				EventItem::change_claim($data['event_item_id']);
+				if ($data['unclaim'] == 'all') {
+
+					$results = EventItem::unclaim_all($data['event_id'], $data['removed_user_id']);
+
+				} else {
+
+					EventItem::change_claim($data['event_item_id']);
+				}
+
 
 			} else {
 				$this->view['error'] = 'validation error';
