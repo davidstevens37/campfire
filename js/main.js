@@ -3,6 +3,8 @@
  */
 $(function() {
 
+	var needs_refresh = false;
+
 /**
  *  GOOGLE MAP
  */
@@ -52,10 +54,10 @@ $(function() {
 		// SETS PINLOCATION DATA TO CLICKED LOCATION AND DROPS PIN IN THAT SPOT. W/ANIMATION
 		var addMarker = function(event) {
 
-			pinLocation.lat = event.latLng.k;
-			pinLocation.lng = event.latLng.D;
+			pinLocation.lat = event.latLng.lat();
+			pinLocation.lng = event.latLng.lng();
 			marker.setMap(null);
-			marker.setAnimation(google.maps.Animation.DROP);
+			marker.setAnimation(google.maps.Animation.DROP);			
 			marker.setPosition(pinLocation);
 			marker.setMap(map);
 			setCoords();
@@ -78,7 +80,9 @@ $(function() {
 	}
 
 	// GOOGLE MAP INIT
-    google.maps.event.addDomListener(window, 'load', initialize);
+	if (document.getElementById('map-canvas')) {
+    	google.maps.event.addDomListener(window, 'load', initialize);
+	}
 // --- end google maps --- 
 
 	//ajax defaults:
@@ -115,7 +119,9 @@ $(function() {
     $('.backdrop').click(function(event) {
     	$('.notifications').removeClass('active');
     	$('.backdrop').removeClass('active');
-    	location.reload();
+    	if (needs_refresh) {
+    		location.reload();
+    	}
     });
     // LINK TO PACKING LIST
     $('.packing-list').click(function(event) {
@@ -204,7 +210,7 @@ $(function() {
 			url: '/process_user',
 			data: data,
 		})
-		.done(function() {
+		.done(function(res) {			
 			console.log("success");
 			location.href = '/events';
 		})
@@ -410,6 +416,7 @@ $(function() {
 			}
 		})
 		.done(function() {
+			needs_refresh = true;
 			removeItem( $('.notifications .events'), button.parents('.event-alert') );
 		})
 		.fail(function() {
